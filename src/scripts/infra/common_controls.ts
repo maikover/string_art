@@ -94,14 +94,6 @@ export const COMMON_CONFIG_CONTROLS: ControlsConfig<Partial<CommonConfig>> = [
     defaultValue: 'minimized',
     children: [
       {
-        key: 'darkMode',
-        label: 'Dark mode',
-        defaultValue: true,
-        type: 'checkbox',
-        affectsNails: false,
-        affectsStrings: false,
-      },
-      {
         key: 'customBackgroundColor',
         label: 'Custom background color',
         defaultValue: false,

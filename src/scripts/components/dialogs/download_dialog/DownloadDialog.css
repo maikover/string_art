@@ -78,3 +78,213 @@ input[type='checkbox']:checked + .icon_btn {
   color: White;
   background: rgba(255, 255, 255, 0.1);
 }
+
+/* ========================================
+   MOBILE DOWNLOAD BOTTOM SHEET
+   ======================================== */
+
+@media only screen and (max-width: 800px) {
+  /* Convert modal dialog to bottom sheet on mobile */
+  confirm-dialog::part(dialog) {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 24px 24px 0 0 !important;
+    border: none !important;
+    background: var(--color-config) !important;
+    box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.7) !important;
+    transform: translateY(0) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide preview section on mobile */
+  #preview {
+    display: none;
+  }
+
+  #wrapper {
+    padding-bottom: env(safe-area-inset-bottom, 16px);
+  }
+
+  /* Compact form styling for mobile */
+  #wrapper form {
+    padding: 16px;
+  }
+
+  fieldset {
+    margin-bottom: 16px;
+    border: none;
+    padding: 0;
+    min-width: 0;
+  }
+
+  fieldset label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .radio-list {
+    display: flex;
+    gap: 12px;
+  }
+
+  .radio-list input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(212, 168, 83, 0.4);
+    border-radius: 50%;
+    background: rgba(212, 168, 83, 0.05);
+    cursor: pointer;
+    position: relative;
+    top: 4px;
+    transition: var(--transition-smooth);
+  }
+
+  .radio-list input[type="radio"]:checked {
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-secondary) 100%);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 12px var(--color-accent-glow);
+  }
+
+  .radio-list input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #0a0908;
+  }
+
+  .radio-list label {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-text);
+    text-transform: none;
+    letter-spacing: normal;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+
+  .dialog-input,
+  select.dialog-input {
+    width: 100%;
+    padding: 10px 12px;
+    background: rgba(245, 240, 232, 0.05);
+    border: 1px solid rgba(212, 168, 83, 0.2);
+    border-radius: 8px;
+    color: var(--color-text);
+    font-size: 14px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23d4a853' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+  }
+
+  .dialog-input:focus,
+  select.dialog-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 12px var(--color-accent-glow);
+  }
+
+  /* Hide the More options panel on mobile - simplified version */
+  expandable-panel[legend="More options"] {
+    display: none;
+  }
+
+  /* Dialog menu buttons - mobile optimized */
+  .dialog-menu {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    border-top: 1px solid rgba(212, 168, 83, 0.15);
+    background: var(--color-header);
+  }
+
+  .dialog-menu button {
+    flex: 1;
+    height: 48px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+  }
+
+  .btn-cancel {
+    background: rgba(245, 240, 232, 0.1);
+    color: var(--color-text);
+    border: 1px solid rgba(245, 240, 232, 0.2);
+  }
+
+  .btn-cancel:hover {
+    background: rgba(245, 240, 232, 0.15);
+  }
+
+  .btn-submit {
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-secondary) 100%);
+    color: #0a0908;
+    border: none;
+    box-shadow: 0 4px 16px rgba(212, 168, 83, 0.4);
+  }
+
+  .btn-submit:hover {
+    background: linear-gradient(135deg, var(--color-accent-hover) 0%, var(--color-accent-secondary-hover) 100%);
+    box-shadow: 0 6px 24px rgba(212, 168, 83, 0.6);
+  }
+
+  /* Dialog title */
+  .dialog-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-accent);
+    padding: 20px 16px 8px;
+    margin: 0;
+    text-align: center;
+  }
+
+  .dialog-desc {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    text-align: center;
+    padding: 0 16px 16px;
+    margin: 0;
+  }
+
+  /* Dialog wrapper padding for content */
+  #dialog_contents {
+    padding: 0 16px 16px;
+    overflow-y: auto;
+    max-height: 50vh;
+  }
+}
+
+/* Handle bar for bottom sheet */
+@media only screen and (max-width: 800px) {
+  confirm-dialog::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 5px;
+    background: rgba(245, 240, 232, 0.3);
+    border-radius: 3px;
+    margin: 12px auto;
+  }
+}

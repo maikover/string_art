@@ -120,10 +120,39 @@ export default class EditorControls<TConfig extends Config> extends EventBus<{
           } else {
             const menuTarget = document.querySelector(href);
             if (menuTarget instanceof ExpandablePanel) {
-              menuTarget.open();
-              menuTarget.scrollIntoView({
-                behavior: 'smooth',
-              });
+              if (window.innerWidth <= 800) {
+                const design = document.querySelector('#design');
+                const isAlreadyVisible = menuTarget.style.display !== 'none' && design.classList.contains('open');
+                
+                if (isAlreadyVisible) {
+                  design.classList.remove('open');
+                } else {
+                  document.querySelectorAll('#controls expandable-panel').forEach((panel: HTMLElement) => {
+                    if (panel === menuTarget) {
+                      panel.style.display = 'grid';
+                      if ('open' in panel && typeof (panel as any).open === 'function') {
+                        (panel as any).open();
+                      } else {
+                        panel.removeAttribute('minimized');
+                        panel.classList.remove('minimized');
+                      }
+                    } else {
+                      panel.style.display = 'none';
+                    }
+                  });
+                  design.classList.add('open');
+                }
+              } else {
+                if ('open' in menuTarget && typeof (menuTarget as any).open === 'function') {
+                  (menuTarget as any).open();
+                } else {
+                  menuTarget.removeAttribute('minimized');
+                  menuTarget.classList.remove('minimized');
+                }
+                menuTarget.scrollIntoView({
+                  behavior: 'smooth',
+                });
+              }
             }
           }
         }
@@ -514,7 +543,7 @@ export default class EditorControls<TConfig extends Config> extends EventBus<{
                 : inputValue
             );
             displayValueElement.className = 'control_input_value';
-            controlEl.appendChild(displayValueElement);
+            label.appendChild(displayValueElement);
           }
         }
 

@@ -14,14 +14,14 @@ class DropdownMenuItem extends HTMLElement {
         li {
           list-style: none;
           padding: 12px 40px 12px 20px;
-          color: White;
+          color: var(--color-text);
           text-decoration: none;
           white-space: nowrap;
           background: transparent;
           cursor: pointer;
         }
         li:hover {
-          background: rgba(255,255,255,.1);
+          background: rgba(128,128,128,.2);
         }
 
         li.selected {

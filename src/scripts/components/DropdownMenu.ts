@@ -16,7 +16,7 @@ export class DropdownMenu extends HTMLElement {
           display: block;
           padding: 10px 15px;
           background: transparent;
-          color: white;
+          color: var(--color-text);
           border: none;
           cursor: pointer;
           font: inherit;

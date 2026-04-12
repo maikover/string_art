@@ -1,40 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap');
+
 :root {
-  --color-accent: #ff218f;
-  --color-accent-hover: #b11b66;
-  --color-buttons-dialog: #212124;
-  --color-canvas-background: #0e0e0e;
-  --color-config: #212124;
-  --color-gray3: #262629;
-  --color-header: #2b2b31;
-  --color-lighter: #ffffff87;
-  --color-link: #68c0ff;
-  --color-link-hover: #85ccff;
-  --color-player: #222226;
-  --color-text: White;
-  --color-text-hover: #85ccff;
-  --color-input: #c51880;
-  --color-input-hover: #961663;
-  --color-input-active: #e20c8c;
-  --color-dialog-background: #212124;
-  --color-error: #cc0000;
+  /* === ATELIER CRAFT COLOR PALETTE === */
 
-  --horizontal-padding: 16px;
-  --vertical-padding: 12px;
+  /* Primary - Rich Dark Warmth (like aged wood) */
+  --color-canvas-background: #0a0908;
+  --color-config: #141210;
+  --color-header: #1a1816;
+  --color-player: #12100e;
+  --color-buttons-dialog: #1a1816;
+  --color-dialog-background: #1a1816;
 
-  --logo1: #9892ff;
-  --logo1-active: #c5c2ff;
-  --logo2: #d4c1ff;
+  /* Accent - Burnished Gold (brass nail warmth) */
+  --color-accent: #d4a853;
+  --color-accent-hover: #e8c066;
+  --color-accent-glow: rgba(212, 168, 83, 0.4);
 
-  --border-light: solid 1px #3a3a3a;
-  --border-lighter: dotted 1px #505050;
-  --border-dialog: solid 1px rgba(255, 255, 255, 0.2);
+  /* Secondary Accent - Copper Rose */
+  --color-accent-secondary: #c77d6b;
+  --color-accent-secondary-hover: #d99485;
 
-  --circular_button_width: 38px;
-  --controls-height: 50px;
-  --header-height: 45px;
-  --select-height: 49px;
+  /* Text hierarchy */
+  --color-text: #f5f0e8;
+  --color-text-muted: #9a958a;
+  --color-text-hover: #fff;
+  --color-link: #d4a853;
+  --color-link-hover: #e8c066;
+
+  /* Input colors */
+  --color-input: #c77d6b;
+  --color-input-hover: #d99485;
+  --color-input-active: #e8a88a;
+
+  /* UI Elements */
+  --color-gray3: #2a2622;
+  --color-lighter: rgba(245, 240, 232, 0.15);
+  --color-error: #c75d5d;
+
+  /* Logo - elegant gradient */
+  --logo1: #d4a853;
+  --logo1-active: #e8c066;
+  --logo2: #c77d6b;
+
+  /* Borders */
+  --border-light: solid 1px rgba(212, 168, 83, 0.15);
+  --border-lighter: dotted 1px rgba(245, 240, 232, 0.2);
+  --border-dialog: solid 1px rgba(212, 168, 83, 0.25);
+
+  /* === TYPOGRAPHY === */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* === SPACING === */
+  --horizontal-padding: 20px;
+  --vertical-padding: 16px;
+
+  /* === DIMENSIONS === */
+  --circular_button_width: 44px;
+  --controls-height: 52px;
+  --header-height: 56px;
+  --select-height: 52px;
   --sidebar-form-padding-top: 16px;
-  --sidebar-width: 270px;
+  --sidebar-width: 300px;
   --player-mobile-height: 100px;
   --responsive-width: 800px;
+
+  /* === EFFECTS === */
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px var(--color-accent-glow);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === LIGHT THEME OVERRIDES === */
+:root.light-theme {
+  /* Primary - Cream/Light Wood */
+  --color-canvas-background: #fdfaf6;
+  --color-config: #f5f0e8;
+  --color-header: #eae1d3;
+  --color-player: #fdfaf6;
+  --color-buttons-dialog: #eae1d3;
+  --color-dialog-background: #fdfaf6;
+
+  /* Accent - Warm Amber/Gold */
+  --color-accent: #b07e32;
+  --color-accent-hover: #9c6c24;
+  --color-accent-glow: rgba(176, 126, 50, 0.2);
+
+  /* Secondary Accent - Copper Rose */
+  --color-accent-secondary: #c77d6b;
+  --color-accent-secondary-hover: #d99485;
+
+  /* Text hierarchy - Darker for readability */
+  --color-text: #2a2622;
+  --color-text-muted: #6b6459;
+  --color-text-hover: #0a0908;
+  --color-link: #b07e32;
+  --color-link-hover: #9c6c24;
+
+  /* Input colors */
+  --color-input: #d99485;
+  --color-input-hover: #c77d6b;
+  --color-input-active: #b86e5c;
+
+  /* UI Elements */
+  --color-gray3: #e8ded2;
+  --color-lighter: rgba(42, 38, 34, 0.1);
+  --color-error: #b54545;
+
+  /* Borders */
+  --border-light: solid 1px rgba(176, 126, 50, 0.2);
+  --border-lighter: dotted 1px rgba(42, 38, 34, 0.15);
+  --border-dialog: solid 1px rgba(176, 126, 50, 0.3);
+
+  /* Shadows */
+  --shadow-soft: 0 4px 20px rgba(176, 126, 50, 0.15);
+}
+
+/* Noise texture overlay for grain effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.03;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }

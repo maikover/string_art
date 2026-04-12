@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>String Art Studio</title>
+    <title>Generative String</title>
     <link type="text/css" rel="stylesheet" href="styles/index.css" />
     <script type="module" src="scripts/main.ts"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="author" content="Yossi Kolesnicov" />
     <meta
       name="description"
@@ -46,22 +48,23 @@
   <body class="dialog_design">
     <main hidden data-is-template="unknown" data-is-default-config="unknown">
       <header id="main_header">
-        <a href="/">
-          <h1>
-            <span class="logo1">String Art</span>
-            <span class="logo2">Studio</span>
-          </h1>
-        </a>
-      </header>
-      <div id="pattern_select_panel" class="minimized">
         <button
           id="menu_btn"
           class="btn-icon small_only"
           title="Open menu"
           data-toggle-for="mobile_menu"
+          style="margin-right: 12px;"
         >
           <i class="icon-hamburger"></i>
         </button>
+        <a href="/">
+          <h1>
+            <span class="logo1">Generative</span>
+            <span class="logo2">String</span>
+          </h1>
+        </a>
+      </header>
+      <div id="pattern_select_panel" class="minimized">
         <button type="button" id="pattern_select_btn">
           <span id="pattern_name">Choose a pattern</span>
           <span class="non-default-config-only color-accent">*</span>
@@ -101,30 +104,10 @@
           <dropdown-menu-separator
             class="non-template-only"
           ></dropdown-menu-separator>
-          <dropdown-menu-item value="design" selected="selected" selectable>
-            <i slot="icon" class="icon-options"></i>
-            Design</dropdown-menu-item
-          >
-          <dropdown-menu-item
-            value="instructions"
-            class="small_only"
-            selectable
-          >
-            <i slot="icon" class="icon-play"></i>
-            Instructions</dropdown-menu-item
-          >
-          <dropdown-menu-item value="info" selectable>
-            <span slot="icon" class="info_icon menu_info_icon">i</span>
-            Info</dropdown-menu-item
-          >
+
           <dropdown-menu-item value="download">
             <i slot="icon" class="icon-download"></i>
-            Download</dropdown-menu-item
-          >
-          <dropdown-menu-item value="download_instructions">
-            <i slot="icon" class="icon-text"></i>
-            Textual instructions
-          </dropdown-menu-item>
+            Download</dropdown-menu-item>
           <dropdown-menu-item value="share" id="share_menu_item">
             <i slot="icon" class="icon-share"></i>
             Share</dropdown-menu-item
@@ -156,9 +139,13 @@
           <a href="#control_strings" class="controls_menu_item circular_btn">
             <i class="icon-thread"></i>
           </a>
-          <a href="#control_nails" class="controls_menu_item circular_btn"
-            >🔨</a
-          >
+          <a href="#control_nails" class="controls_menu_item circular_btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="8" y="2" width="8" height="4" rx="1" />
+              <path d="M12 6v14" />
+              <path d="M10 20l2 2 2-2" />
+            </svg>
+          </a>
           <button
             id="controls_reset_btn"
             class="controls_menu_item circular_btn"
@@ -203,7 +190,7 @@
             <dd id="closest_distance_between_nails"></dd>
           </div>
         </dl>
-        <h4>Thread length 🧵</h4>
+        <h4>Thread length <i class="icon-thread" style="margin-left: 8px;"></i></h4>
         <dl class="info__data">
           <dt>Total length</dt>
           <dd><span id="threads_total_length"></span></dd>
@@ -296,85 +283,34 @@
               </button>
             </div>
           </header>
-          <section>
-            <p>
-              Welcome to String Art Studio! With this app you can design and
-              produce your own beautiful string art projects.
-            </p>
+          <section class="menu-hero">
+            <p class="tagline">Design beautiful string art patterns</p>
+            <button
+              class="cta_btn menu_cta"
+              data-toggle-for="pattern_select_dropdown"
+            >
+              <i class="icon-grid"></i>
+              Explore Patterns
+            </button>
           </section>
-          <section>
-            <h2>How-to</h2>
+          <section class="howto_compact">
+            <h2>How it works</h2>
             <ol>
               <li>Choose a pattern</li>
-              <li>Change options (like number of nails, shapes and colors)</li>
-              <li>Download and print a map of nail positions</li>
-              <li>Drive nails into a wood panel through the nails map</li>
-              <li>
-                Put strings to the nails as shown in the app's player. You can
-                play this process in the app's player and pause, to make things
-                clear.
-              </li>
+              <li>Customize nails & colors</li>
+              <li>Download & print template</li>
+              <li>Create your artwork</li>
             </ol>
           </section>
           <section>
-            <h2>Support</h2>
-
-            <p>
-              This app is free and maintained with love to promote string art. I
-              take requests for new patterns and ideas on how to improve it, so
-              feel free to
-              <a
-                href="mailto:yoxigen+string_art@gmail.com?subject=Contact through String Art Studio"
-                target="_blank"
-                class="no_text_break menu_link"
-                >send me an email</a
-              >.
-            </p>
-            <p>
-              If you got value from the app and would like to show your
-              appreciation through a small donation, I'd really apreciate it,
-              and the money would help pay for hosting expenses and keeping the
-              app free. Thank you so much!
-              <br /><br />
-              <a
-                href="https://ko-fi.com/yossikolesnicov"
-                targe="_blank"
-                class="menu_btn"
-                ><img
-                  src="https://storage.ko-fi.com/cdn/cup-border.png"
-                  alt="Ko-fi donations"
-                  class="kofiimg"
-                  width="25"
-                  height="20"
-                />
-                Donate</a
-              >
-            </p>
-          </section>
-          <section>
-            <h2>More info</h2>
             <ul class="menu_links">
-              <li>
-                <a href="https://github.com/yoxigen/string_art" target="_blank">
-                  <img
-                    src="images/GitHub-Mark-Light-32px.png"
-                    class="menu_item_aside menu_link_img"
-                    alt="GitHub"
-                    width="24"
-                    height="24"
-                  />
-                  String Art Studio on GitHub
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://en.wikipedia.org/wiki/String_art"
-                  target="_blank"
-                  >String Art on Wikipedia</a
-                >
-              </li>
-              <li>
-                <a href="privacy.html">Privacy policy</a>
+              <li style="display: flex; justify-content: center; gap: 16px; padding: 12px; margin-top: 20px;">
+                <button type="button" id="theme_light_btn" class="circular_btn" title="Light Theme" style="border: 2px solid transparent;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+                </button>
+                <button type="button" id="theme_dark_btn" class="circular_btn" title="Dark Theme" style="border: 2px solid transparent;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
               </li>
             </ul>
           </section>

@@ -60,6 +60,36 @@ async function main() {
 
   await initServiceWorker();
 
+  await initServiceWorker();
+
+  // Initialize theme
+  const lightBtn = document.getElementById('theme_light_btn') as HTMLButtonElement;
+  const darkBtn = document.getElementById('theme_dark_btn') as HTMLButtonElement;
+  
+  if (lightBtn && darkBtn) {
+    const applyTheme = (theme: 'light' | 'dark') => {
+      if (theme === 'light') {
+        document.documentElement.classList.add('light-theme');
+        lightBtn.style.borderColor = 'var(--color-accent)';
+        darkBtn.style.borderColor = 'transparent';
+      } else {
+        document.documentElement.classList.remove('light-theme');
+        darkBtn.style.borderColor = 'var(--color-accent)';
+        lightBtn.style.borderColor = 'transparent';
+      }
+      localStorage.setItem('app_theme', theme);
+      if (viewer.pattern && viewer.renderer) {
+        viewer.pattern.draw(viewer.renderer, { redrawNails: true, redrawStrings: false });
+      }
+    };
+
+    const savedTheme = localStorage.getItem('app_theme') || 'dark';
+    applyTheme(savedTheme as 'light' | 'dark');
+    
+    lightBtn.addEventListener('click', () => applyTheme('light'));
+    darkBtn.addEventListener('click', () => applyTheme('dark'));
+  }
+
   document.body.querySelectorAll('.pattern_only').forEach(hide);
 
   type Pattern = StringArt<any>;
@@ -163,6 +193,37 @@ async function main() {
       if (toggledElement) {
         toggledElement.classList.toggle('open');
         document.body.classList.toggle('dialog_' + dialogId);
+
+        // Handle menu_open class for mobile menu layering
+        if (dialogId === 'mobile_menu') {
+          document.body.classList.toggle('menu_open', toggledElement.classList.contains('open'));
+        }
+
+        // Close mobile menu when pattern dropdown opens (it covers the hamburger button)
+        if (dialogId === 'pattern_select_dropdown' && toggledElement.classList.contains('open')) {
+          const mobileMenu = document.querySelector('#mobile_menu');
+          const menuBtn = document.querySelector('#menu_btn');
+          if (mobileMenu?.classList.contains('open')) {
+            mobileMenu.classList.remove('open');
+            document.body.classList.remove('menu_open');
+            menuBtn?.classList.remove('active');
+          }
+        }
+      }
+    }
+
+    // Toggle design panel on mobile when clicking the handle or label
+    const designPanel = document.querySelector('#design');
+    if (designPanel && window.innerWidth <= 800) {
+      // Check if click is on the tab area (handle + label area = first 60px)
+      const rect = designPanel.getBoundingClientRect();
+      const clickY = e.clientY - rect.top;
+
+      if (clickY < 60 && !e.target.closest('#controls_panel')) {
+        e.preventDefault();
+        designPanel.classList.toggle('open');
+        document.body.classList.toggle('dialog_design');
+        // Do NOT trigger resize - preserve canvas size
       }
     }
   });
@@ -205,7 +266,7 @@ async function main() {
 
     document
       .querySelector(`dropdown-menu-item[value='${panelId}']`)
-      .setAttribute('selected', 'selected');
+      ?.setAttribute('selected', 'selected');
 
     const toggledElement = document.querySelector('#' + panelId);
     if (toggledElement && !toggledElement.classList.contains('open')) {
@@ -335,6 +396,9 @@ async function main() {
     document.body.setAttribute('data-pattern', pattern.id);
 
     document.body.querySelectorAll('.pattern_only').forEach(unHide);
+
+
+
     viewer.update();
 
     player.update(viewer.getStepCount(), { draw: false });

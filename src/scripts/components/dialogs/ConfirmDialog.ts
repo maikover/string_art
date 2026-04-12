@@ -11,6 +11,7 @@ export default class ConfirmDialog extends HTMLElement {
   private dialog: HTMLDialogElement;
   private cancelBtn: HTMLButtonElement;
   private submitBtn: HTMLButtonElement;
+  private closeIconBtn: HTMLButtonElement;
   private titleEl: HTMLElement;
   private descEl: HTMLElement;
   private submitText: HTMLSpanElement;
@@ -40,6 +41,7 @@ export default class ConfirmDialog extends HTMLElement {
     this.dialog = shadow.querySelector('dialog')!;
     this.cancelBtn = shadow.querySelector('.btn-cancel')!;
     this.submitBtn = shadow.querySelector('.btn-submit')!;
+    this.closeIconBtn = shadow.querySelector('.btn-close-icon')!;
     this.titleEl = shadow.querySelector('.dialog-title')!;
     this.descEl = shadow.querySelector('.dialog-desc')!;
     this.submitText = shadow.querySelector('#submit_text')!;
@@ -47,10 +49,14 @@ export default class ConfirmDialog extends HTMLElement {
   }
 
   connectedCallback() {
-    this.cancelBtn.addEventListener('click', () => {
+    const closeAction = () => {
       this.dialog.returnValue = '';
       this.dialog.close();
-    });
+    };
+    this.cancelBtn.addEventListener('click', closeAction);
+    if (this.closeIconBtn) {
+      this.closeIconBtn.addEventListener('click', closeAction);
+    }
 
     // Initialize attributes on first connect
     this.syncAttributes();

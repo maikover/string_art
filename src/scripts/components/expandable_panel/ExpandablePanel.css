@@ -1,8 +1,16 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
 fieldset {
   border: var(--border-light);
   background: rgba(255, 255, 255, 0.03);
   border-radius: 9px;
-  padding-inline: 0.5em;
+  padding-inline: 1em;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 fieldset > legend {

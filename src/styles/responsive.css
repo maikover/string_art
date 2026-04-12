@@ -1,67 +1,309 @@
 @media only screen and (max-width: 800px) {
+  /* Hide pattern select header elements when no pattern selected */
+  body:not([data-pattern]) #pattern_select_panel {
+    background: transparent;
+    border-bottom: none;
+  }
+
+  body:not([data-pattern]) #pattern_select_btn,
+  body:not([data-pattern]) #save_btn,
+  body:not([data-pattern]) #pattern_menu {
+    display: none;
+  }
+
+
+
+  /* Override touch targets for mobile (48dp minimum) */
+  :root {
+    --circular_button_width: 48px;
+    --controls-height: 64px;
+    --player-mobile-height: 72px;
+  }
+
   main {
     grid-template-columns: 1fr;
-    grid-template-rows: var(--select-height) 1fr;
+    grid-template-rows: 48px 48px 1fr;
     grid-template-areas:
+      'header'
       'pattern_select'
       'canvas';
   }
 
   body[data-pattern] main {
     grid-template-columns: 1fr;
-    grid-template-rows: var(--select-height) 1fr var(--player-mobile-height);
+    grid-template-rows: 48px 48px 1fr;
     grid-template-areas:
-      'pattern_select'
-      'canvas'
-      'player';
-  }
-
-  .dialog_design main,
-  .dialog_info main {
-    grid-template-rows: var(--select-height) 100vw;
-    grid-template-areas:
+      'header'
       'pattern_select'
       'canvas';
   }
 
-  body[data-pattern].dialog_design main,
-  body[data-pattern].dialog_info main {
-    grid-template-columns: 1fr;
-    grid-template-rows: var(--select-height) min(100vw, 50vh) 1fr;
-    grid-template-areas:
-      'pattern_select'
-      'canvas'
-      'config';
-  }
-
-  body[data-pattern].dialog_info main {
-    grid-template-rows: var(--select-height) 70vw 1fr;
-  }
-
   #main_header {
-    display: none;
+    display: flex;
+    grid-area: header;
+    background: var(--color-header);
+    height: 48px;
+    align-items: center;
+    padding: 0 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+  
+  #main_header h1 {
+    font-size: 18px;
   }
 
+  /* Compact pattern select bar when pattern is selected */
+  body[data-pattern] #pattern_select_panel {
+    padding: 4px 8px;
+    background: var(--color-config);
+  }
+
+  body[data-pattern] #pattern_select_btn {
+    font-size: 14px;
+  }
+
+  body[data-pattern] #pattern_select_btn::after {
+    font-size: 18px;
+    top: 2px;
+  }
+
+  /* Canvas gets maximum space - use fr units so it doesn't change with viewport */
+  main {
+    grid-template-columns: 1fr;
+    grid-template-rows: 48px 48px 1fr;
+    grid-template-areas:
+      'header'
+      'pattern_select'
+      'canvas';
+  }
+
+  body[data-pattern] main {
+    grid-template-columns: 1fr;
+    grid-template-rows: 48px 48px 1fr;
+    grid-template-areas:
+      'header'
+      'pattern_select'
+      'canvas';
+  }
+
+  /* Player constraints on mobile */
+  #instructions {
+    position: fixed;
+    bottom: 68px; /* sits cleanly above the handle */
+    left: 16px;
+    right: 16px;
+    height: 64px; /* fixed height for the pill */
+    z-index: 5;
+    background: rgba(10, 9, 8, 0.85) !important;
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: opacity 0.3s;
+    border: 1px solid rgba(212, 168, 83, 0.2);
+  }
+
+  #design.open ~ #instructions {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Reset inner player controls to fit inside the parent pill */
+  .player_controls {
+    background: transparent !important;
+    border: none !important;
+    top: 0 !important;
+    left: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Sliding transition states */
+  #player_continuous {
+    transform: translateY(0);
+  }
+
+  #player_steps {
+    transform: translateY(100%) !important;
+  }
+
+  #instructions.with_steps #player_continuous {
+    transform: translateY(-100%);
+  }
+
+  #instructions.with_steps #player_steps {
+    transform: translateY(0) !important;
+  }
+
+  #canvas_panel {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    width: 100vw;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    align-self: start;
+    margin-top: 8px; /* Small breathing room from header */
+  }
+
+  /* Canvas maintains its natural size and is centered inside the new top-aligned container */
+  #canvas_panel canvas,
+  #canvas_panel svg {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* Ultra-compact Bottom Sheet Controls - starts collapsed */
   #design {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    /* Limit height to exactly the space left below the canvas, but keep a minimum of 40vh so it doesn't break in landscape */
+    max-height: max(40vh, calc(100vh - 100px - 100vmin));
+    border-radius: 24px 24px 0 0;
     border-right: none;
-    border-top: var(--border-light);
-    box-shadow: 0 -5px 8px rgb(0 0 0 / 40%), 0 -1px 0 black;
-    display: none;
+    border-top: 1px solid rgba(212, 168, 83, 0.3);
+    box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    transform: translateY(calc(100% - 56px));
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
     padding-top: 0;
+    overflow: hidden;
+    background: var(--color-config);
   }
 
-  #controls_panel {
-    margin-inline-start: 56px;
-  }
-  #pattern_select_panel {
-    padding-inline-start: 8px;
+  /* Force collapsed state on mobile - ignore .open class */
+  body:not(.dialog_design) #design {
+    transform: translateY(calc(100% - 56px)) !important;
   }
 
-  .dialog_design #design {
+  /* Also reset open class to collapsed */
+  @media only screen and (max-width: 800px) {
+    #design {
+      transform: translateY(calc(100% - 56px)) !important;
+    }
+
+    #design.open {
+      transform: translateY(0) !important;
+    }
+  }
+
+  /* Tab handle - visible collapsed indicator */
+  #design::before {
+    content: '';
     display: block;
+    width: 36px;
+    height: 5px;
+    background: rgba(245, 240, 232, 0.3);
+    border-radius: 3px;
+    margin: 10px auto 6px;
+    flex-shrink: 0;
+    cursor: grab;
   }
 
-  .dialog_design #instructions,
+  /* Tab label */
+  #design::after {
+    content: 'Controls';
+    display: block;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  /* Click on handle or label to toggle */
+  #design:not(.open)::before,
+  #design:not(.open)::after {
+    cursor: pointer;
+  }
+
+  #design.open::before {
+    cursor: grab;
+  }
+
+  #design.open::after {
+    cursor: pointer;
+  }
+
+  #design.open {
+    transform: translateY(0);
+  }
+
+  #design.open::after {
+    content: 'Tap to collapse';
+  }
+
+  /* Compact controls panel */
+  #controls_panel {
+    margin-inline-start: 0;
+    padding: 8px 16px 24px;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  /* Collapsed state indicator - subtle hint */
+  body:not(.dialog_design) #design:not(.open) {
+    cursor: pointer;
+  }
+
+  body:not(.dialog_design) #design:not(.open):active {
+    transform: translateY(calc(100% - 56px));
+  }
+
+  /* Hide bottom sheet when menu is open */
+  body.menu_open #design {
+    transform: translateY(100%) !important;
+    pointer-events: none;
+  }
+
+  /* Hide pattern dropdown when mobile menu is open */
+  body.menu_open #pattern_select_dropdown {
+    display: none !important;
+  }
+
+  /* Hide hamburger button when mobile menu is open */
+  body.menu_open #menu_btn {
+    display: none;
+  }
+
+  /* Pattern dropdown - higher z-index to be above bottom sheet */
+  #pattern_select_dropdown {
+    z-index: 20;
+  }
+
+  /* Show instructions on mobile when dialog_instructions is active */
+  .dialog_instructions #instructions {
+    display: flex !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    max-height: 40vh;
+    overflow-y: auto;
+    z-index: 9;
+    background: var(--color-player);
+    border-top: 1px solid rgba(212, 168, 83, 0.2);
+    border-radius: 20px 20px 0 0;
+  }
+
   .dialog_info #instructions {
     display: none !important;
   }
@@ -76,6 +318,59 @@
 
   .circular_btn:not(.active):hover {
     background: transparent;
+  }
+
+  /* Compact controls menu */
+  #controls_menu {
+    display: none;
+  }
+
+  /* Optimize controls for mobile - stack vertically, compact labels */
+  expandable-panel {
+    display: block;
+    width: 100%;
+  }
+  
+
+  
+  #controls .control {
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  
+  /* Group containers inside controls */
+  #controls .control_group {
+    grid-column: 1 / -1;
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  #controls label {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  #controls select {
+    padding: 8px 10px;
+    margin-bottom: 4px;
+  }
+
+  /* Compact range inputs */
+  .range-input {
+    height: 32px;
+  }
+
+  /* Make expandable panels more compact */
+  expandable-panel {
+    --panel-padding: 8px;
+  }
+
+  expandable-panel > summary {
+    padding: 8px 0;
+    font-size: 12px;
   }
 }
 

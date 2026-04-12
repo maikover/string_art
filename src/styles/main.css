@@ -17,7 +17,9 @@ body {
 body {
   background: var(--color-canvas-background);
   color: var(--color-text);
-  font-family: Roboto, sans-serif;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 main {
@@ -34,9 +36,7 @@ main {
 @media only screen and (min-width: 801px) {
   body[data-pattern] main {
     grid-template-columns: var(--sidebar-width) 1fr;
-    grid-template-rows: var(--header-height) var(--select-height) 1fr var(
-        --controls-height
-      );
+    grid-template-rows: var(--header-height) var(--select-height) 1fr var(--controls-height);
     grid-template-areas:
       'header canvas'
       'pattern_select canvas'
@@ -45,9 +45,7 @@ main {
   }
 
   body.dialog_info[data-pattern] main {
-    grid-template-rows: var(--header-height) var(--select-height) 1fr var(
-        --controls-height
-      );
+    grid-template-rows: var(--header-height) var(--select-height) 1fr var(--controls-height);
     grid-template-areas:
       'header canvas'
       'pattern_select canvas'
@@ -61,8 +59,9 @@ main {
 }
 
 button {
-  font-family: Roboto;
+  font-family: var(--font-body);
 }
+
 #design {
   border-right: var(--border-light);
   max-height: 100%;
@@ -73,9 +72,10 @@ button {
   display: flex;
   flex-direction: column;
   position: relative;
-  padding-top: 40px;
+  padding-top: 48px;
 }
 
+/* Elegant header with gold accent line */
 #main_header {
   display: flex;
   flex-direction: row;
@@ -83,11 +83,23 @@ button {
   background: var(--color-header);
   border-right: var(--border-light);
   align-items: center;
-  box-shadow: 0 2px 6px rgb(0 0 0 / 30%);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
   position: relative;
   z-index: 2;
   padding: 0 var(--horizontal-padding);
 }
+
+#main_header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent) 0%, transparent 100%);
+  opacity: 0.6;
+}
+
 #main_header a {
   text-decoration: none;
 }
@@ -98,15 +110,20 @@ h1 {
   padding: 0;
   display: flex;
   gap: 0.5em;
-  font-size: 21px;
+  font-size: 22px;
+  font-weight: 500;
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+
+.logo1,
+.logo2 {
+  color: var(--color-accent);
   font-weight: 500;
 }
 
-.logo1 {
-  color: var(--logo1);
-}
-.logo2 {
-  color: var(--logo2);
+.logo1::after {
+  display: none;
 }
 
 canvas,
@@ -124,18 +141,23 @@ svg {
 a {
   color: var(--color-link);
   font-size: 14px;
+  transition: var(--transition-smooth);
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
   color: var(--color-link-hover);
+  text-shadow: 0 0 8px var(--color-accent-glow);
 }
+
 #canvas_panel {
   grid-area: canvas;
   text-align: center;
   overflow: hidden;
   position: relative;
+  background: radial-gradient(ellipse at center, #151310 0%, #0a0908 100%);
 }
+
 #canvas_panel.overflow {
   overflow: auto;
 }
@@ -150,18 +172,21 @@ a:hover {
 }
 
 .small_title {
-  font-size: 1.4em;
+  font-size: 1.5em;
   margin-top: 0;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--color-accent);
-  text-shadow: 1px 1px 1px Black;
+  font-family: var(--font-display);
+  letter-spacing: 0.03em;
+  text-shadow: 0 0 20px var(--color-accent-glow);
 }
 
 .info_icon {
-  font-family: Times, serif;
+  font-family: var(--font-display);
   font-size: 1.2em;
   font-style: italic;
   font-weight: bold;
+  color: var(--color-accent);
 }
 
 .menu_info_icon {
@@ -190,4 +215,25 @@ a:hover {
 [data-is-default-config='false'] .default-config-only,
 [data-is-default-config='unknown'] .default-config-only {
   display: none !important;
+}
+.toast_notification {
+  position: fixed;
+  bottom: 15vh;
+  left: 50%;
+  transform: translateX(-50%) translateY(50px);
+  background: var(--color-accent);
+  color: #000;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-weight: 600;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.toast_notification.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
 }

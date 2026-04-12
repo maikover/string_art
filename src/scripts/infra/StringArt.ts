@@ -343,17 +343,18 @@ abstract class StringArt<
 
     const {
       showNails,
-      darkMode,
       backgroundColor,
       customBackgroundColor,
       enableBackground,
     } = this.config;
 
+    const isDarkMode = !document.documentElement.classList.contains('light-theme');
+
     renderer.setBackground(
       enableBackground !== false
         ? customBackgroundColor
           ? backgroundColor
-          : darkMode
+          : isDarkMode
           ? DEFAULT_COLORS.dark
           : DEFAULT_COLORS.light
         : null

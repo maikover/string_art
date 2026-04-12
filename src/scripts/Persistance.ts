@@ -118,6 +118,8 @@ export default class Persistance extends EventBus<{
       pattern: Persistance.patternDataToStringArt(newPatternData),
     });
 
+    this.showToast('Pattern saved!');
+
     return newPatternData;
   }
 
@@ -134,6 +136,8 @@ export default class Persistance extends EventBus<{
       this.emit('save', {
         pattern: Persistance.patternDataToStringArt(patternData),
       });
+
+      this.showToast('Pattern saved!');
     }
   }
 
@@ -147,6 +151,23 @@ export default class Persistance extends EventBus<{
 
     this.savePattern(newPatternData);
     return newPatternData;
+  }
+
+  showToast(message: string) {
+    const toast = document.createElement('div');
+    toast.className = 'toast_notification';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    // Trigger layout
+    toast.getBoundingClientRect();
+    
+    toast.classList.add('show');
+    
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 400);
+    }, 2500);
   }
 
   renameCurrentPattern() {
