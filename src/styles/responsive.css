@@ -42,9 +42,10 @@
     display: flex;
     grid-area: header;
     background: var(--color-header);
-    height: 48px;
+    min-height: calc(48px + env(safe-area-inset-top, 0));
+    height: auto;
     align-items: center;
-    padding: 0 16px;
+    padding: env(safe-area-inset-top, 0) max(16px, env(safe-area-inset-right, 0)) 0 max(16px, env(safe-area-inset-left, 0));
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
   }
   
@@ -89,7 +90,7 @@
   /* Player constraints on mobile */
   #instructions {
     position: fixed;
-    bottom: 68px; /* sits cleanly above the handle */
+    bottom: calc(68px + env(safe-area-inset-bottom, 0px)); /* sits cleanly above the handle */
     left: 16px;
     right: 16px;
     height: 64px; /* fixed height for the pill */
@@ -176,23 +177,24 @@
     box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.7);
     display: flex;
     flex-direction: column;
-    transform: translateY(calc(100% - 56px));
+    transform: translateY(calc(100% - 56px - env(safe-area-inset-bottom, 0px)));
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 10;
     padding-top: 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
     overflow: hidden;
     background: var(--color-config);
   }
 
   /* Force collapsed state on mobile - ignore .open class */
   body:not(.dialog_design) #design {
-    transform: translateY(calc(100% - 56px)) !important;
+    transform: translateY(calc(100% - 56px - env(safe-area-inset-bottom, 0px))) !important;
   }
 
   /* Also reset open class to collapsed */
   @media only screen and (max-width: 800px) {
     #design {
-      transform: translateY(calc(100% - 56px)) !important;
+      transform: translateY(calc(100% - 56px - env(safe-area-inset-bottom, 0px))) !important;
     }
 
     #design.open {

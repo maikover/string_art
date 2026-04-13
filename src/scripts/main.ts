@@ -199,8 +199,19 @@ async function main() {
           document.body.classList.toggle('menu_open', toggledElement.classList.contains('open'));
         }
 
+        const isOpen = toggledElement.classList.contains('open');
+
+        // History API integration for navigation Back button
+        if (['mobile_menu', 'pattern_select_dropdown'].includes(dialogId)) {
+          if (isOpen) {
+             history.pushState({ ...history.state, overlayId: dialogId }, '');
+          } else if (history.state?.overlayId === dialogId) {
+             history.back();
+          }
+        }
+
         // Close mobile menu when pattern dropdown opens (it covers the hamburger button)
-        if (dialogId === 'pattern_select_dropdown' && toggledElement.classList.contains('open')) {
+        if (dialogId === 'pattern_select_dropdown' && isOpen) {
           const mobileMenu = document.querySelector('#mobile_menu');
           const menuBtn = document.querySelector('#menu_btn');
           if (mobileMenu?.classList.contains('open')) {
@@ -219,14 +230,65 @@ async function main() {
       const rect = designPanel.getBoundingClientRect();
       const clickY = e.clientY - rect.top;
 
-      if (clickY < 60 && !e.target.closest('#controls_panel')) {
+      if (clickY >= 0 && clickY < 60 && !e.target.closest('#controls_panel')) {
         e.preventDefault();
         designPanel.classList.toggle('open');
         document.body.classList.toggle('dialog_design');
+        
+        const isDesignOpen = designPanel.classList.contains('open');
+        if (isDesignOpen) {
+          history.pushState({ ...history.state, overlayId: 'design' }, '');
+        } else if (history.state?.overlayId === 'design') {
+          history.back();
+        }
+        
         // Do NOT trigger resize - preserve canvas size
       }
     }
   });
+
+  // Swipe to open/close design panel on mobile
+  const designPanelMobile = document.querySelector('#design') as HTMLElement;
+  if (designPanelMobile) {
+    let touchStartY = 0;
+    
+    designPanelMobile.addEventListener('touchstart', (e) => {
+      if (window.innerWidth > 800) return;
+      const rect = designPanelMobile.getBoundingClientRect();
+      const touchY = e.touches[0].clientY - rect.top;
+      
+      // Bind swipe only when touched the upper handle area (first 60px)
+      if (touchY >= 0 && touchY < 60) {
+        touchStartY = e.touches[0].clientY;
+      } else {
+        touchStartY = 0;
+      }
+    }, { passive: true });
+
+    designPanelMobile.addEventListener('touchend', (e) => {
+      if (!touchStartY || window.innerWidth > 800) return;
+      
+      const touchEndY = e.changedTouches[0].clientY;
+      const deltaY = touchEndY - touchStartY;
+      
+      if (Math.abs(deltaY) > 30) { // Require at least 30px movement to trigger swipe
+        const isDesignOpen = designPanelMobile.classList.contains('open');
+        
+        if (deltaY > 0 && isDesignOpen) { // Swipe DOWN
+          designPanelMobile.classList.remove('open');
+          document.body.classList.remove('dialog_design');
+          if (history.state?.overlayId === 'design') {
+            history.back();
+          }
+        } else if (deltaY < 0 && !isDesignOpen) { // Swipe UP
+          designPanelMobile.classList.add('open');
+          document.body.classList.add('dialog_design');
+          history.pushState({ ...history.state, overlayId: 'design' }, '');
+        }
+      }
+      touchStartY = 0;
+    });
+  }
 
   elements.resetBtn.addEventListener('click', reset);
 
@@ -244,11 +306,19 @@ async function main() {
 
   thumbnails.addEventListener('select', ({ patternId }) => {
     const pattern = findPatternById(patternId);
-    routing.navigateToPattern(pattern);
+    
+    // Erase overlay state ghost frames by functionally replacing them when navigating
+    const shouldReplace = !!history.state?.overlayId;
+    routing.navigateToPattern(pattern, { replaceState: shouldReplace });
+    
     posthog.capture('thumbnail_select', {
       pattern: pattern.type,
       isTemplate: pattern.isTemplate,
     });
+
+    // Cleanup lingering body locks that popup navigation usually clears
+    document.body.classList.remove('dialog_pattern_select_dropdown');
+    document.querySelector('[data-toggle-for="pattern_select_dropdown"]')?.classList.remove('active');
   });
 
   const PANELS = ['info', 'design', 'instructions'];

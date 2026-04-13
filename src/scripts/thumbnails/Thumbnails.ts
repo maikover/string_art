@@ -107,6 +107,7 @@ export class Thumbnails extends EventBus<{ select: { patternId: string } }> {
   open() {
     if (!this.isOpen) {
       this.elements.root.classList.remove(MINIMIZED_CLASS);
+      this.elements.dropdown.classList.add('open');
       if (!this.thumbnailsRendered) {
         this.createThumbnails();
         this.thumbnailsRendered = true;
@@ -128,8 +129,19 @@ export class Thumbnails extends EventBus<{ select: { patternId: string } }> {
   close() {
     if (this.isOpen) {
       this.elements.root.classList.add(MINIMIZED_CLASS);
+      this.elements.dropdown.classList.remove('open');
       document.body.removeEventListener('mousedown', this._onClickOutside);
       this._onClickOutside = null;
+      
+      // If closed outside of a popstate (e.g. dimmer click) and URL history still claims it's open, revert the URL.
+      if (history.state?.overlayId === 'pattern_select_dropdown') {
+        history.back();
+      }
+      
+      // Cleanup lingering explicit body classes tied to toggling this UI
+      document.body.classList.remove('dialog_pattern_select_dropdown');
+      const toggleBtn = document.querySelector('[data-toggle-for="pattern_select_dropdown"]');
+      if (toggleBtn) toggleBtn.classList.remove('active');
     }
   }
 
@@ -177,6 +189,13 @@ export class Thumbnails extends EventBus<{ select: { patternId: string } }> {
       patternLink.href = `?pattern=${pattern.id}`;
       patternLink.setAttribute('data-pattern', pattern.id);
       patternLink.title = pattern.name;
+      
+      patternLink.addEventListener('click', e => {
+        e.preventDefault();
+        this.emit('select', { patternId: pattern.id });
+        this.toggle(); // Close the thumbnails dropdown
+      });
+      
       li.appendChild(patternLink);
     });
 
