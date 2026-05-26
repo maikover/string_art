@@ -1,0 +1,71 @@
+{
+  "app": {
+    "name": "String Art Studio",
+    "tagline": "Diseña tus patrones de arte con hilo"
+  },
+  "nav": {
+    "editor": "Editor",
+    "patterns": "Patrones",
+    "gallery": "Galería",
+    "settings": "Ajustes"
+  },
+  "editor": {
+    "newPattern": "Nuevo Patrón",
+    "selectPattern": "Seleccionar Patrón",
+    "nailCount": "Cantidad de Clavos",
+    "radius": "Radio",
+    "lineWidth": "Ancho de Línea",
+    "backgroundColor": "Color de Fondo",
+    "nailColor": "Color de Clavos",
+    "lineColor": "Color de Línea",
+    "renderAs": "Renderizar Como",
+    "canvas": "Canvas",
+    "svg": "SVG",
+    "showGrid": "Mostrar Cuadrícula",
+    "showNumbers": "Mostrar Números",
+    "reset": "Reiniciar",
+    "undo": "Deshacer",
+    "redo": "Rehacer"
+  },
+  "patterns": {
+    "star": "Estrella",
+    "mandala": "Mandala",
+    "spiral": "Espiral",
+    "wave": "Onda",
+    "flower": "Flor",
+    "maurerRose": "Rosa de Maurer",
+    "sun": "Sol",
+    "lotus": "Loto",
+    "comet": "Cometa",
+    "crosses": "Cruces",
+    "polygon": "Polígono",
+    "assymetry": "Asimetría",
+    "freestyle": "Estilo Libre",
+    "flowerOfLife": "Flor de la Vida",
+    "danceOfPlanets": "Danza de Planetas",
+    "hexagonSpades": "Hexágono Espadas",
+    "starOfDavid": "Estrella de David"
+  },
+  "export": {
+    "title": "Exportar",
+    "png": "Exportar como PNG",
+    "svg": "Exportar como SVG",
+    "pdf": "Exportar como PDF",
+    "share": "Compartir"
+  },
+  "settings": {
+    "title": "Ajustes",
+    "language": "Idioma",
+    "theme": "Tema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema"
+  },
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "close": "Cerrar",
+    "loading": "Cargando..."
+  }
+}

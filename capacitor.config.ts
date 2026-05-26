@@ -3,18 +3,18 @@ import { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'com.stringart.studio',
   appName: 'String Art Studio',
-  webDir: 'dist',
+  webDir: 'web/android/app/src/main/assets/public',
   server: {
     androidScheme: 'https'
   },
   android: {
-    backgroundColor: '#0a0908',
+    backgroundColor: '#ffffff',
     allowMixedContent: true
   },
   plugins: {
     SplashScreen: {
       launchShowDuration: 1500,
-      backgroundColor: '#0a0908',
+      backgroundColor: '#ffffff',
       showSpinner: false
     }
   }

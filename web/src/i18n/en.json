@@ -1,0 +1,72 @@
+{
+  "app": {
+    "name": "String Art Studio",
+    "tagline": "Design your string art patterns"
+  },
+  "nav": {
+    "editor": "Editor",
+    "patterns": "Patterns",
+    "gallery": "Gallery",
+    "settings": "Settings"
+  },
+  "editor": {
+    "newPattern": "New Pattern",
+    "selectPattern": "Select Pattern",
+    "nailCount": "Nail Count",
+    "radius": "Radius",
+    "lineWidth": "Line Width",
+    "backgroundColor": "Background Color",
+    "nailColor": "Nail Color",
+    "lineColor": "Line Color",
+    "renderAs": "Render As",
+    "canvas": "Canvas",
+    "svg": "SVG",
+    "showGrid": "Show Grid",
+    "showNumbers": "Show Numbers",
+    "reset": "Reset",
+    "undo": "Undo",
+    "redo": "Redo"
+  },
+  "patterns": {
+    "title": "Patterns",
+    "star": "Star",
+    "mandala": "Mandala",
+    "spiral": "Spiral",
+    "wave": "Wave",
+    "flower": "Flower",
+    "maurerRose": "Maurer Rose",
+    "sun": "Sun",
+    "lotus": "Lotus",
+    "comet": "Comet",
+    "crosses": "Crosses",
+    "polygon": "Polygon",
+    "assymetry": "Assymetry",
+    "freestyle": "Freestyle",
+    "flowerOfLife": "Flower of Life",
+    "danceOfPlanets": "Dance of Planets",
+    "hexagonSpades": "Hexagon Spades",
+    "starOfDavid": "Star of David"
+  },
+  "export": {
+    "title": "Export",
+    "png": "Export as PNG",
+    "svg": "Export as SVG",
+    "pdf": "Export as PDF",
+    "share": "Share"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "close": "Close",
+    "loading": "Loading..."
+  }
+}
