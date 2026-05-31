@@ -1,11 +1,13 @@
 #info {
   padding: 20px var(--horizontal-padding) 12px;
   overflow-y: auto;
-  border-top: var(--border-dialog);
+  border-top: var(--border-light);
   min-height: 350px;
   display: none;
   grid-area: config;
   background: var(--color-config);
+  border: 4px solid #000000;
+  box-shadow: var(--shadow-md);
 }
 
 #info.open {
@@ -14,27 +16,32 @@
 
 #info h4 {
   margin-bottom: 0.8em;
-  font-weight: 500;
+  font-weight: 900;
   padding-bottom: 8px;
-  border-bottom: var(--border-dialog);
+  border-bottom: 4px solid #000000;
   font-family: var(--font-display);
   color: var(--color-accent);
   font-size: 1.1em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 #info h5 {
   margin-top: 1.2em;
   margin-bottom: 0.6em;
-  font-weight: 500;
-  color: var(--color-text-muted);
+  font-weight: 900;
+  color: var(--color-text);
   font-size: 0.9em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
 }
 
 #info label {
   margin-bottom: 6px;
   display: block;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .info__data {
@@ -44,23 +51,30 @@
 
 .info__data dt {
   display: inline-block;
-  color: var(--color-text-muted);
+  color: var(--color-text);
+  font-weight: 9500;
 }
 
 .info__data > div {
   margin-bottom: 8px;
+  padding: 8px;
+  background: #FFFFFF;
+  border: 4px solid #000000;
+  box-shadow: var(--shadow-sm);
 }
 
 .info__data dt::after {
   content: ':';
   margin-right: 6px;
+  font-weight: 700;
 }
 
 .info__data dd {
   display: inline-block;
   margin-inline-start: 0;
-  font-weight: 600;
+  font-weight: 900;
   color: var(--color-accent);
+  text-transform: uppercase;
 }
 
 #threads_per_color {
@@ -75,6 +89,10 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  padding: 6px;
+  background: #FFFFFF;
+  border: 4px solid #000000;
+  box-shadow: var(--shadow-sm);
 }
 
 .info__thread_color_value {
@@ -82,15 +100,16 @@
   transform-origin: left;
   font-size: 10pt;
   height: 14px;
-  border: 1px solid rgba(212, 168, 83, 0.3);
-  border-radius: 3px;
+  border: 4px solid #000000;
+  border-radius: 0;
   display: inline-block;
   margin-inline-end: 8px;
   vertical-align: middle;
-  box-shadow: 0 0 6px var(--color-accent-glow);
+  box-shadow: var(--shadow-sm);
 }
 
 .info__thread_color_value_text {
   font-size: 11pt;
-  color: var(--color-text-muted);
+  color: var(--color-text);
+  font-weight: 700;
 }

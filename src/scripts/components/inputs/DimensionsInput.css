@@ -7,13 +7,41 @@
 
 #readonly {
   font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 input {
-  width: 70px;
+  width: 80px;
+  border: 4px solid #000000;
+  border-radius: 0;
+  background: #FFFFFF;
+  padding: 8px;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
 }
 
+input:hover {
+  background: var(--color-accent-secondary);
+  box-shadow: var(--shadow-md);
+}
+
+input:focus {
+  outline: none;
+  background: var(--color-accent-secondary);
+  box-shadow: var(--shadow-md);
+}
+
+/* Linked connector indicator — diagonal badge */
 #connector.linked {
   transform: rotateZ(45deg);
   display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: var(--color-accent);
+  border: 4px solid #000000;
+  box-shadow: var(--shadow-sm);
+  margin: 0 4px;
 }

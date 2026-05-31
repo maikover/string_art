@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "String Art Studio",
   description: "Design beautiful string art patterns",
   icons: {
-    icon: '/favicon.ico',
+    icon: '/favicon.svg',
   },
 };
 

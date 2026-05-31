@@ -38,19 +38,12 @@ class Routing extends EventBus<{
       const state: StringArtQueryParams & { overlayId?: string } = ev.state ?? {};
 
       // Auto-collapse matching mobile overlays if they are open but missing from the popped state
-      const managedOverlays = ['mobile_menu', 'design', 'pattern_select_dropdown'];
+      const managedOverlays = ['design', 'pattern_select_dropdown'];
       managedOverlays.forEach(overlayId => {
          const el = document.getElementById(overlayId);
          if (el?.classList.contains('open') && state.overlayId !== overlayId) {
              el.classList.remove('open');
              document.body.classList.remove('dialog_' + overlayId);
-             
-             // Specific cleanup for mobile menu
-             if (overlayId === 'mobile_menu') {
-                document.body.classList.remove('menu_open');
-                const btn = document.querySelector('[data-toggle-for="mobile_menu"]');
-                if (btn) btn.classList.remove('active');
-             }
              
              // Specific cleanup for design toggle handle logic
              if (overlayId === 'pattern_select_dropdown') {

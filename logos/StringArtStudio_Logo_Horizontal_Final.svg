@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" class="stringart-svg"><defs><style>@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&amp;display=swap');</style></defs><svg id="svg-base-source" class="stringart-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                                <polygon class="svg-shadow" points="250,30 360,60 440,140 470,250 440,360 360,440 250,470 140,440 60,360 30,250 60,140 140,60" transform="translate(14, 14)" fill="#000000"/>
+                                
+                                <polygon points="250,30 360,60 440,140 470,250 440,360 360,440 250,470 140,440 60,360 30,250 60,140 140,60" class="layer-outer" stroke-width="8" fill="#FF6B6B" stroke="#000000"/>
+                                <polygon points="250,90 330,110 390,170 410,250 390,330 330,390 250,410 170,390 110,330 90,250 110,170 170,110" class="layer-mid" stroke-width="6" fill="#FFD166" stroke="#000000"/>
+                                <polygon points="250,150 300,165 340,205 350,250 340,295 300,335 250,350 200,335 160,295 150,250 160,205 200,165" class="layer-inner" stroke-width="5" fill="#A5A6F6" stroke="#000000"/>
+                                <polygon points="250,190 280,200 300,225 300,250 300,275 280,300 250,310 220,300 200,275 200,250 200,225 220,200" class="layer-center" stroke-width="4" fill="#4EA8DE" stroke="#000000"/>
+                                
+                                <g stroke-width="8px" class="svg-line-heavy" stroke="#000000">
+                                    <line x1="250" y1="30" x2="250" y2="470"/>
+                                    <line x1="30" y1="250" x2="470" y2="250"/>
+                                    <line x1="60" y1="140" x2="440" y2="360"/>
+                                    <line x1="140" y1="60" x2="360" y2="440"/>
+                                    <line x1="360" y1="60" x2="140" y2="440"/>
+                                    <line x1="440" y1="140" x2="60" y2="360"/>
+                                </g>
+                                <g stroke-width="3px" class="svg-line-fine" stroke="#000000" opacity="0.4">
+                                    <line x1="250" y1="30" x2="440" y2="360"/>
+                                    <line x1="250" y1="30" x2="60" y2="360"/>
+                                    <line x1="470" y1="250" x2="140" y2="60"/>
+                                    <line x1="470" y1="250" x2="140" y2="440"/>
+                                    <line x1="250" y1="470" x2="440" y2="140"/>
+                                    <line x1="250" y1="470" x2="60" y2="140"/>
+                                    <line x1="30" y1="250" x2="360" y2="60"/>
+                                    <line x1="30" y1="250" x2="360" y2="440"/>
+                                </g>
+
+                                <g fill="#000000" class="svg-pin">
+                                    <circle cx="250" cy="30" r="12"/> <circle cx="360" cy="60" r="12"/>
+                                    <circle cx="440" cy="140" r="12"/> <circle cx="470" cy="250" r="12"/>
+                                    <circle cx="440" cy="360" r="12"/> <circle cx="360" cy="440" r="12"/>
+                                    <circle cx="250" cy="470" r="12"/> <circle cx="140" cy="440" r="12"/>
+                                    <circle cx="60" cy="360" r="12"/> <circle cx="30" cy="250" r="12"/>
+                                    <circle cx="60" cy="140" r="12"/> <circle cx="140" cy="60" r="12"/>
+                                </g>
+                            </svg><g transform="translate(540, 130)">
+                <!-- Bloque STRINGART -->
+                <rect x="6" y="6" width="510" height="110" fill="#000000"/>
+                <rect x="0" y="0" width="510" height="110" fill="#FF6B6B" stroke="#000000" stroke-width="6"/>
+                <text x="255" y="82" font-family="'Archivo Black', sans-serif" font-size="76" font-weight="bold" fill="#000000" text-anchor="middle" letter-spacing="-2">STRINGART</text>
+                
+                <!-- Bloque STUDIO -->
+                <g transform="translate(0, 140)">
+                    <rect x="6" y="6" width="510" height="110" fill="#000000"/>
+                    <rect x="0" y="0" width="510" height="110" fill="#FFD166" stroke="#000000" stroke-width="6"/>
+                    <text x="255" y="82" font-family="'Archivo Black', sans-serif" font-size="76" font-weight="bold" fill="#000000" text-anchor="middle" letter-spacing="-2">STUDIO</text>
+                </g>
+            </g></svg>

@@ -13,7 +13,7 @@
     align-items: center;
     background: var(--color-player);
     justify-content: center;
-    border-top: 1px solid rgba(212, 168, 83, 0.15);
+    border-top: var(--border-light);
   }
 }
 
@@ -36,8 +36,11 @@
   justify-content: end;
   margin-inline-start: 12px;
   flex: 0;
-  color: var(--color-text-muted);
+  color: var(--color-text);
   font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 #instructions #pause_btn {
@@ -63,6 +66,7 @@
   background: var(--color-player);
   padding: 0 12px;
   height: 52px;
+  border: 4px solid #000000;
 }
 
 .player_controls i {
@@ -80,7 +84,6 @@
   padding-inline-end: 20px;
 }
 
-/* Elegant step mode styling */
 #player_steps {
   flex: 0;
   position: absolute;
@@ -88,16 +91,16 @@
   left: 0;
   width: 100%;
   z-index: 1;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
-  border-bottom: solid 1px rgba(212, 168, 83, 0.15);
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  border-bottom: var(--border-light);
   padding-inline-end: 0;
-  background: linear-gradient(180deg, var(--color-player) 0%, rgba(10, 9, 8, 0.95) 100%);
+  background: var(--color-player);
 }
 
 @media only screen and (min-width: 801px) {
   #player_steps {
     position: static;
-    transition: opacity 0.5s ease-out;
+    transition: opacity 0.3s ease-out;
     opacity: 0;
     display: none;
   }
@@ -123,7 +126,7 @@
 #player_steps_close {
   flex: 0;
   opacity: 0.4;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease-out;
 }
 
 #player_steps_close:hover {
@@ -140,11 +143,11 @@
   }
 }
 
-/* Elegant step direction display */
+/* Step direction display — neo-brutalist bordered boxes */
 #player_step_directions {
   min-width: 10em;
   text-align: center;
-  font-weight: 500;
+  font-weight: 700;
   font-size: 1em;
   display: flex;
   flex-direction: row;
@@ -154,22 +157,23 @@
 
 .player_step_directions_number {
   flex: 1;
-  border: 1px solid rgba(212, 168, 83, 0.3);
-  border-radius: 8px;
+  border: 4px solid #000000;
   padding: 4px 8px;
-  background: rgba(212, 168, 83, 0.08);
+  background: var(--color-accent-secondary);
   text-align: center;
   padding-inline: 0.6em;
   white-space: nowrap;
-  color: var(--color-accent);
-  font-weight: 600;
+  color: #000000;
+  font-weight: 900;
+  text-transform: uppercase;
   transition: var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
 }
 
 .player_step_directions_number:hover {
-  background: rgba(212, 168, 83, 0.15);
-  border-color: var(--color-accent);
-  box-shadow: 0 0 12px var(--color-accent-glow);
+  background: var(--color-accent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 .player_step_directions_number::before {
@@ -183,7 +187,8 @@
   font-size: 1.2em;
   position: relative;
   top: -1px;
-  color: var(--color-accent-secondary);
+  color: var(--color-accent);
+  font-weight: 900;
 }
 
 #player_track {
@@ -192,63 +197,65 @@
   flex: 1;
 }
 
-/* Elegant range slider */
+/* Range slider — neo-brutalist */
 #player_position {
   width: 100%;
   margin: 0;
-  height: 6px;
-  background: rgba(245, 240, 232, 0.1);
-  border-radius: 3px;
-  border: none;
+  height: 12px;
+  background: #FFFFFF;
+  border: 4px solid #000000;
+  border-radius: 0;
   cursor: pointer;
+  box-shadow: var(--shadow-sm);
 }
 
 #player_position::-webkit-slider-runnable-track {
-  height: 6px;
-  background: rgba(245, 240, 232, 0.1);
-  border-radius: 3px;
+  height: 4px;
+  background: var(--color-accent-secondary);
+  border-radius: 0;
 }
 
 #player_position::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-secondary) 100%);
+  height: 20px;
+  width: 20px;
+  background: var(--color-accent);
+  border: 4px solid #000000;
   cursor: pointer;
-  margin-top: -5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 12px var(--color-accent-glow);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: -8px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
 }
 
 #player_position::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-accent-glow);
+  background: var(--color-accent-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 #player_position::-moz-range-track {
-  height: 6px;
-  background: rgba(245, 240, 232, 0.1);
-  border-radius: 3px;
+  height: 4px;
+  background: var(--color-accent-secondary);
+  border-radius: 0;
 }
 
 #player_position::-moz-range-thumb {
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-secondary) 100%);
+  height: 20px;
+  width: 20px;
+  background: var(--color-accent);
+  border: 4px solid #000000;
+  border-radius: 0;
   cursor: pointer;
-  border: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 12px var(--color-accent-glow);
+  box-shadow: var(--shadow-sm);
 }
 
 #player_buttons .circular_btn {
-  background: rgba(212, 168, 83, 0.1);
-  border-color: rgba(212, 168, 83, 0.25);
+  background: #FFFFFF;
+  border-color: #000000;
 }
 
 #player_buttons .circular_btn:hover {
-  background: rgba(212, 168, 83, 0.2);
+  background: var(--color-accent-secondary);
 }
 
 /* Mobile touch-optimized styles */
@@ -277,7 +284,7 @@
 
   /* Larger slider thumb for touch */
   #player_position {
-    height: 8px;
+    height: 16px;
   }
 
   #player_position::-webkit-slider-runnable-track {
@@ -285,9 +292,9 @@
   }
 
   #player_position::-webkit-slider-thumb {
-    height: 24px;
-    width: 24px;
-    margin-top: -8px;
+    height: 28px;
+    width: 28px;
+    margin-top: -10px;
   }
 
   #player_position::-moz-range-track {
@@ -295,8 +302,8 @@
   }
 
   #player_position::-moz-range-thumb {
-    height: 24px;
-    width: 24px;
+    height: 28px;
+    width: 28px;
   }
 
   /* Larger circular buttons */

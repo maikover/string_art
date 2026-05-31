@@ -1,18 +1,34 @@
 input[type='color'] {
   padding: 0;
-  border: none;
+  border: 4px solid #000000;
   background: none;
   position: relative;
   top: 2px;
   cursor: pointer;
+  box-shadow: var(--shadow-sm);
 }
 
 input[type='number'],
 input[type='text'] {
   padding: 8px 12px;
+  border: 4px solid #000000;
+  border-radius: 0;
+  background: #FFFFFF;
+  color: #000000;
+  font-family: var(--font-body);
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
 }
 
-/* Elegant range inputs */
+input[type='number']:focus,
+input[type='text']:focus {
+  outline: none;
+  background: var(--color-accent-secondary);
+  box-shadow: var(--shadow-md);
+}
+
+/* Range inputs — neo-brutalist track and thumb */
 input[type='range'],
 string-art-range-input {
   width: 100%;
@@ -22,94 +38,119 @@ string-art-range-input {
 input[type='range'] {
   -webkit-appearance: none;
   appearance: none;
-  height: 6px;
-  background: rgba(245, 240, 232, 0.1);
-  border-radius: 3px;
-  border: none;
+  height: 16px;
+  background: #FFFFFF;
+  border: 4px solid #000000;
+  border-radius: 0;
   cursor: pointer;
+  box-shadow: var(--shadow-sm);
 }
 
 input[type='range']::-webkit-slider-runnable-track {
-  height: 6px;
-  background: linear-gradient(90deg, rgba(212, 168, 83, 0.2) 0%, rgba(199, 125, 107, 0.2) 100%);
-  border-radius: 3px;
+  height: 8px;
+  background: var(--color-accent-secondary);
 }
 
 input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  height: 18px;
-  width: 18px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-secondary) 100%);
+  height: 24px;
+  width: 24px;
+  background: var(--color-accent);
+  border: 4px solid #000000;
   cursor: pointer;
-  margin-top: -6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 12px var(--color-accent-glow);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: -8px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
 }
 
 input[type='range']::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-accent-glow);
+  background: var(--color-accent-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 input[type='range']::-moz-range-track {
-  height: 6px;
-  background: rgba(245, 240, 232, 0.1);
-  border-radius: 3px;
+  height: 8px;
+  background: var(--color-accent-secondary);
+  border: none;
 }
 
 input[type='range']::-moz-range-thumb {
-  height: 18px;
-  width: 18px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-secondary) 100%);
+  height: 24px;
+  width: 24px;
+  background: var(--color-accent);
+  border: 4px solid #000000;
+  border-radius: 0;
   cursor: pointer;
-  border: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 12px var(--color-accent-glow);
+  box-shadow: var(--shadow-sm);
 }
 
 input[type='range']:focus {
   outline: none;
 }
 
-input[type='range']:focus::-webkit-slider-thumb {
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5), 0 0 0 3px var(--color-accent-glow);
-}
-
-/* Checkbox styling */
+/* Checkbox — bordered square, checkmark is solid fill */
 input[type='checkbox'] {
   appearance: none;
   -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid rgba(212, 168, 83, 0.4);
-  border-radius: 4px;
-  background: rgba(212, 168, 83, 0.05);
+  width: 24px;
+  height: 24px;
+  border: 4px solid #000000;
+  border-radius: 0;
+  background: #FFFFFF;
   cursor: pointer;
   position: relative;
   top: 4px;
   transition: var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
 }
 
 input[type='checkbox']:hover {
-  border-color: var(--color-accent);
-  background: rgba(212, 168, 83, 0.1);
+  background: var(--color-accent-secondary);
+  box-shadow: var(--shadow-md);
 }
 
 input[type='checkbox']:checked {
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-secondary) 100%);
-  border-color: var(--color-accent);
-  box-shadow: 0 0 12px var(--color-accent-glow);
+  background: var(--color-accent);
+  border-color: #000000;
+  box-shadow: var(--shadow-sm);
 }
 
 input[type='checkbox']:checked::after {
-  content: '✓';
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  color: #0a0908;
-  font-size: 12px;
-  font-weight: bold;
+  width: 8px;
+  height: 12px;
+  border: 4px solid #000000;
+  border-top: none;
+  border-left: none;
+  transform: translate(-50%, -60%) rotate(45deg);
+}
+
+/* Select — hard bordered, sharp corners */
+select {
+  border: 4px solid #000000;
+  border-radius: 0;
+  background: #FFFFFF;
+  color: #000000;
+  font-family: var(--font-body);
+  font-weight: 700;
+  padding: 8px 12px;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+select:hover {
+  background: var(--color-accent-secondary);
+  box-shadow: var(--shadow-md);
+}
+
+select:focus {
+  outline: none;
+  background: var(--color-accent-secondary);
+  box-shadow: var(--shadow-md);
 }

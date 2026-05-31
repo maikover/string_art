@@ -67,9 +67,10 @@ export default function EditorPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      {/* Header */}
       <header className="bg-white border-b-4 border-black p-4 flex items-center justify-between">
-        <h1 className="text-2xl font-bold tracking-tight">{t('app.title')}</h1>
+        <h1 className="text-2xl font-bold tracking-tight flex items-center gap-2">
+          <img src="/logo_horizontal.svg" alt="StringArt Studio" className="h-8 w-auto" />
+        </h1>
       </header>
 
       <div className="flex flex-1 overflow-hidden">

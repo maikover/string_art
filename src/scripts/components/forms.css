@@ -20,47 +20,50 @@ fieldset > section {
   margin-top: 0.3em;
 }
 
+/* Neo-brutalist dialog inputs */
 .dialog-input {
-  background: transparent;
-  border: solid 1px var(--color-input);
-  border-radius: 4px;
-  height: 32px !important;
-  padding: 4px 8px !important;
-  color: White;
+  background: #FFFFFF;
+  border: 4px solid #000000;
+  border-radius: 0;
+  height: 40px !important;
+  padding: 8px 12px !important;
+  color: #000000;
   outline: none;
   box-sizing: border-box;
+  font-family: var(--font-body);
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
 }
 
 .dialog-input-small {
-  width: 50px;
+  width: 80px;
 }
 
 .dialog-input-tall {
-  height: 50px !important;
+  height: 60px !important;
   font-size: 1.1em;
   width: 100%;
 }
 
 .dialog-input::selection {
-  background: White;
-  color: Black;
+  background: var(--color-accent);
+  color: #000000;
 }
 
 .dialog-input:hover,
 .dialog-input:active,
 .dialog-input:focus-visible {
-  border-color: var(--color-input-active);
-}
-
-.dialog-input:active,
-.dialog-input:focus-visible {
-  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-accent);
+  background: var(--color-accent-secondary);
+  box-shadow: var(--shadow-md);
 }
 
 .dialog-input option {
-  background-color: White;
-  color: Black;
+  background-color: #FFFFFF;
+  color: #000000;
 }
+
 .row {
   display: flex;
   flex-direction: row;
@@ -72,33 +75,65 @@ fieldset > section {
   background: transparent;
   height: 32px !important;
   padding: 0 !important;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-text);
   cursor: pointer;
-  border-bottom: dotted 1px rgba(255, 255, 255, 0.5);
+  border-bottom: 4px solid #000000;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .dialog-lesser-select option {
-  color: Black;
+  color: #000000;
+  background: #FFFFFF;
 }
 
 .radio-list {
-  border: solid 1px var(--color-input);
-  border-radius: 4px;
-  height: 32px;
-  padding: 4px 8px;
+  border: 4px solid #000000;
+  border-radius: 0;
+  height: 40px;
+  padding: 8px 12px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   width: fit-content;
+  background: #FFFFFF;
+  box-shadow: var(--shadow-sm);
 }
 
 .radio-list input[type='radio'] {
-  margin: 0 4px 0 0;
+  margin: 0 8px 0 0;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 4px solid #000000;
+  border-radius: 0;
+  background: #FFFFFF;
+  cursor: pointer;
+  position: relative;
+}
+
+.radio-list input[type='radio']:checked {
+  background: var(--color-accent);
+}
+
+.radio-list input[type='radio']:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: #000000;
+  transform: translate(-50%, -50%);
 }
 
 input[type='radio'] + label {
   display: inline-block;
   margin-bottom: 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 input[type='radio'] + label:not(:last-child) {

@@ -4,10 +4,11 @@
 }
 
 fieldset {
-  border: var(--border-light);
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 9px;
-  padding-inline: 1em;
+  border: var(--expandable-panel-border, var(--border-light));
+  background: var(--expandable-panel-bg, rgba(255, 255, 255, 0.03));
+  border-radius: 0;
+  padding-inline: 0.8em;
+  padding-bottom: 0.8em;
   width: 100%;
   margin: 0;
   box-sizing: border-box;

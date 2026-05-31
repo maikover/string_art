@@ -6,13 +6,14 @@ import { Thumbnails } from './thumbnails/Thumbnails';
 import { isShareSupported, share } from './share';
 import { initServiceWorker } from './pwa';
 import SVGRenderer from './infra/renderers/SVGRenderer';
+import CanvasRenderer from './infra/renderers/CanvasRenderer';
 import './components/components';
 import Persistance from './Persistance';
 import StringArt from './infra/StringArt';
 import { confirm } from './helpers/dialogs';
 import Viewer from './viewer/Viewer';
 import type DownloadDialog from './components/dialogs/download_dialog/DownloadDialog';
-import { findPatternById } from './helpers/pattern_utils';
+import { findPatternById, getAllPatternsTypes } from './helpers/pattern_utils';
 import routing from './routing';
 import { hide, unHide } from './helpers/dom_utils';
 import info from './Info';
@@ -49,6 +50,7 @@ async function main() {
 
   const persistance = new Persistance();
   const thumbnails = new Thumbnails(persistance);
+  (window as any).thumbnailsInstance = thumbnails;
 
   let controls: EditorControls<any>;
 
@@ -194,30 +196,14 @@ async function main() {
         toggledElement.classList.toggle('open');
         document.body.classList.toggle('dialog_' + dialogId);
 
-        // Handle menu_open class for mobile menu layering
-        if (dialogId === 'mobile_menu') {
-          document.body.classList.toggle('menu_open', toggledElement.classList.contains('open'));
-        }
-
         const isOpen = toggledElement.classList.contains('open');
 
         // History API integration for navigation Back button
-        if (['mobile_menu', 'pattern_select_dropdown'].includes(dialogId)) {
+        if (dialogId === 'pattern_select_dropdown') {
           if (isOpen) {
              history.pushState({ ...history.state, overlayId: dialogId }, '');
           } else if (history.state?.overlayId === dialogId) {
              history.back();
-          }
-        }
-
-        // Close mobile menu when pattern dropdown opens (it covers the hamburger button)
-        if (dialogId === 'pattern_select_dropdown' && isOpen) {
-          const mobileMenu = document.querySelector('#mobile_menu');
-          const menuBtn = document.querySelector('#menu_btn');
-          if (mobileMenu?.classList.contains('open')) {
-            mobileMenu.classList.remove('open');
-            document.body.classList.remove('menu_open');
-            menuBtn?.classList.remove('active');
           }
         }
       }
@@ -299,7 +285,7 @@ async function main() {
     });
   }
 
-  elements.instructionsLink.addEventListener('click', e => {
+  elements.instructionsLink?.addEventListener('click', e => {
     e.preventDefault();
     routing.navigateToMain();
   });
@@ -381,6 +367,31 @@ async function main() {
 
   unHide(document.querySelector('main'));
   initRouting();
+  initLandingGallery();
+
+  function initLandingGallery() {
+    const container = document.getElementById('landing_patterns_container');
+    const backBtn = document.getElementById('back_to_gallery_btn');
+
+    if (!container || !backBtn) return;
+
+    // Use the Thumbnails instance — it already knows how to render pattern cards
+    (window as any).thumbnailsInstance.renderLandingGallery(container);
+
+    // Back button — return to landing gallery
+    backBtn.addEventListener('click', () => {
+      routing.navigateToMain();
+    });
+
+    // Update back button visibility based on pattern state
+    const updateBackBtn = () => {
+      backBtn.hidden = !document.body.hasAttribute('data-pattern');
+    };
+
+    routing.addEventListener('pattern', updateBackBtn);
+    routing.addEventListener('main', updateBackBtn);
+    updateBackBtn();
+  }
 
   function initRouting() {
     setTimeout(() => {

@@ -35,9 +35,9 @@
   },
   "homepage": "https://github.com/yoxigen/string_art#readme",
   "devDependencies": {
-    "@parcel/packager-raw-url": "^2.2.0",
-    "@parcel/transformer-inline-string": "^2.15.4",
-    "@parcel/transformer-webmanifest": "^2.2.0",
+    "@parcel/packager-raw-url": "2.15.4",
+    "@parcel/transformer-inline-string": "2.15.4",
+    "@parcel/transformer-webmanifest": "2.15.4",
     "jest": "^30.0.5",
     "jest-environment-jsdom": "^30.0.5",
     "parcel": "2.15.4",
