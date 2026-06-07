@@ -94,8 +94,8 @@ export default class Viewer extends EventBus<{
     }
   }
 
-  getLastStringNailNumbers(): [number, number] {
-    return this.pattern.getLastStringNailNumbers();
+  getLastStringNailNumbers(): [number, number] | null {
+    return this.pattern?.getLastStringNailNumbers() ?? null;
   }
 
   setRenderer(renderer: Renderer) {
@@ -267,13 +267,13 @@ export default class Viewer extends EventBus<{
 
   goto(position: number) {
     this.#withRenderer();
-    this.pattern.goto(this.renderer, position, {
+    this.pattern?.goto(this.renderer, position, {
       showInstructions: viewOptions.showInstructions,
     });
   }
 
   prev() {
-    if (this.position === 0) {
+    if (this.position === 0 || !this.pattern) {
       return;
     }
 
@@ -283,12 +283,15 @@ export default class Viewer extends EventBus<{
   }
 
   next(): { done: boolean } {
+    if (!this.pattern) {
+      return { done: true };
+    }
     return { done: this.pattern.drawNext().done };
   }
 
   getStepCount(): number {
     this.#withRenderer();
-    return this.pattern.getStepCount({ size: this.renderer.getSize() });
+    return this.pattern?.getStepCount({ size: this.renderer.getSize() }) ?? 0;
   }
 
   #withRenderer(): asserts this is { renderer: Renderer } {

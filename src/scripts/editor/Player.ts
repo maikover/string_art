@@ -234,6 +234,10 @@ export default class Player {
     }
 
     const step = () => {
+      if (!this.viewer.pattern) {
+        this.pause();
+        return;
+      }
       if (!this.viewer.next().done) {
         if (speed) {
           const stepTimeout = setTimeout(step, speed);

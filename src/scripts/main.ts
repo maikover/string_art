@@ -832,6 +832,7 @@ async function main() {
       }
 
       function unselectPattern() {
+        player.pause();
         currentPattern = null;
         viewer.setPattern(null);
         thumbnails.setCurrentPattern(null);
