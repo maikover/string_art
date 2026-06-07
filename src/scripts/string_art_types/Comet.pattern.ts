@@ -59,7 +59,7 @@ const COLOR_CONFIG = Color.getConfig({
   customControls: [
     {
       key: 'colorPerLayer',
-      label: 'Color per layer',
+      label: 'i18n:pl_color_per_layer',
       defaultValue: true,
       type: 'checkbox',
       affectsNails: false,
@@ -74,13 +74,13 @@ type TCalc = {
 export default class Comet extends StringArt<CometConfig, TCalc> {
   static type = 'comet';
 
-  name = 'Comet';
+  name = 'i18n:pattern_comet';
   id = 'comet';
   controls: ControlsConfig<CometConfig> = [
     Circle.nailsConfig,
     {
       key: 'layers',
-      label: 'Layers',
+      label: 'i18n:pl_layers',
       defaultValue: 5,
       type: 'range',
       attr: {
@@ -92,7 +92,7 @@ export default class Comet extends StringArt<CometConfig, TCalc> {
     },
     {
       key: 'ringSize',
-      label: 'First layer size',
+      label: 'i18n:pl_first_layer_size',
       description:
         'Nail count from the top center nail to the first connected nail in the first layer',
       defaultValue: 0.3,
@@ -108,7 +108,7 @@ export default class Comet extends StringArt<CometConfig, TCalc> {
     },
     {
       key: 'layerSpread',
-      label: 'Layer Spread',
+      label: 'i18n:pl_layer_spread',
       type: 'select',
       defaultValue: 'distance',
       options: Object.entries(spreadModes).map(([key, { name }]) => ({
@@ -120,7 +120,7 @@ export default class Comet extends StringArt<CometConfig, TCalc> {
     },
     {
       key: 'layerDistance',
-      label: 'Layer Distance',
+      label: 'i18n:pl_layer_distance',
       type: 'range',
       attr: {
         min: 1,

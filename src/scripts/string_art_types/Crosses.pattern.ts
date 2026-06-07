@@ -70,13 +70,13 @@ function getOrientationLabel(
 export default class Crosses extends StringArt<CrossesConfig, TCalc> {
   static type = 'crosses';
 
-  name = 'Crosses';
+  name = 'i18n:pattern_crosses';
   id = 'crosses';
   controls: ControlsConfig<CrossesConfig> = [
     {
       type: 'range',
       key: 'n',
-      label: 'Nails per side',
+      label: 'i18n:pl_nails_per_side',
       attr: {
         min: 2,
         max: 100,
@@ -88,11 +88,11 @@ export default class Crosses extends StringArt<CrossesConfig, TCalc> {
     {
       key: 'orientation',
       type: 'select',
-      label: 'Orientation',
+      label: 'i18n:pl_orientation',
       defaultValue: 'v',
       options: [
-        { value: 'v', label: '↕ Vertical' },
-        { value: 'h', label: '↔ Horizontal' },
+        { value: 'v', label: 'i18n:pl_orientation_vertical' },
+        { value: 'h', label: 'i18n:pl_orientation_horizontal' },
       ],
       affectsStepCount: false,
       isStructural: true,
@@ -100,7 +100,7 @@ export default class Crosses extends StringArt<CrossesConfig, TCalc> {
     {
       key: 'sidesRotation',
       type: 'range',
-      label: 'Sides rotation',
+      label: 'i18n:pl_sides_rotation',
       attr: {
         min: -0.25,
         max: 0.25,
@@ -115,7 +115,7 @@ export default class Crosses extends StringArt<CrossesConfig, TCalc> {
     {
       key: 'fineControl',
       type: 'checkbox',
-      label: 'Fine control',
+      label: 'i18n:pl_fine_control',
       defaultValue: false,
       affectsStepCount: false,
       isStructural: true,
@@ -123,7 +123,7 @@ export default class Crosses extends StringArt<CrossesConfig, TCalc> {
     {
       key: 'lockGap',
       type: 'checkbox',
-      label: 'Lock horizontal/vertical gap',
+      label: 'i18n:pl_lock_hv_gap',
       defaultValue: true,
       isStructural: true,
       affectsStepCount: false,
@@ -164,7 +164,7 @@ export default class Crosses extends StringArt<CrossesConfig, TCalc> {
     {
       key: 'center',
       type: 'group',
-      label: 'Center ◈',
+      label: 'i18n:pl_center',
       show: ({ fineControl }) => fineControl,
       children: [
         {
@@ -318,7 +318,7 @@ export default class Crosses extends StringArt<CrossesConfig, TCalc> {
     },
     {
       key: 'edges',
-      label: 'Edges ◅ ▻',
+      label: 'i18n:pl_edges',
       type: 'group',
       show: ({ fineControl }) => fineControl,
       children: [
@@ -406,7 +406,7 @@ export default class Crosses extends StringArt<CrossesConfig, TCalc> {
       customControls: [
         {
           key: 'setCenterColor',
-          label: 'Manually set center color',
+          label: 'i18n:pl_manually_set_center_color',
           defaultValue: false,
           type: 'checkbox',
           affectsNails: false,
@@ -415,7 +415,7 @@ export default class Crosses extends StringArt<CrossesConfig, TCalc> {
         {
           key: 'centerColor',
           type: 'color',
-          label: 'Center color',
+          label: 'i18n:pl_center_color',
           defaultValue: '#ffd500',
           show: ({ setCenterColor }) => setCenterColor,
           affectsNails: false,

@@ -15,7 +15,7 @@ export default class Wave extends Mandala<WaveConfig> {
   static type = 'wave';
 
   id = 'wave';
-  name = 'Wave';
+  name = 'i18n:pattern_wave';
   link =
     'https://www.etsy.com/il-en/listing/943140543/personalized-gift-string-art-mandala?ref=sim_rv-5&pro=1';
   controls: ControlsConfig<MandalaConfig & WaveConfig> = [
@@ -25,7 +25,7 @@ export default class Wave extends Mandala<WaveConfig> {
     },
     {
       key: 'layerFill',
-      label: 'Layer fill',
+      label: 'i18n:pl_layer_fill',
       defaultValue: 0.5,
       type: 'range',
       attr: {
@@ -41,14 +41,14 @@ export default class Wave extends Mandala<WaveConfig> {
     Circle.distortionConfig,
     {
       key: 'layers',
-      label: 'Layers',
+      label: 'i18n:pl_layers',
       defaultValue: 11,
       type: 'range',
       attr: { min: 1, max: 20, step: 1 },
     },
     {
       key: 'layerSpread',
-      label: 'Layer spread',
+      label: 'i18n:pl_layer_spread',
       defaultValue: 15 / 200,
       type: 'range',
       attr: {
@@ -62,7 +62,7 @@ export default class Wave extends Mandala<WaveConfig> {
     },
     {
       key: 'reverse',
-      label: 'Reverse',
+      label: 'i18n:pl_reverse',
       defaultValue: true,
       type: 'checkbox',
       isStructural: true,

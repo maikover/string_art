@@ -4,6 +4,7 @@ import Persistance from '../Persistance';
 import EventBus from '../helpers/EventBus';
 import { getAllPatternsTypes, findPatternById } from '../helpers/pattern_utils';
 import routing from '../routing';
+import i18n from '../i18n';
 
 const THUMBNAIL_WIDTH_PX = '100px';
 const MINIMIZED_CLASS = 'minimized';
@@ -151,7 +152,7 @@ export class Thumbnails extends EventBus<{ select: { patternId: string } }> {
   setCurrentPattern(pattern: StringArt<any>) {
     this.pattern = pattern;
     if (this.elements.patternName) {
-      this.elements.patternName.innerText = pattern?.name ?? 'Choose a pattern';
+      this.elements.patternName.innerText = pattern?.displayName ?? i18n.t('thumb_choose_pattern');
     }
   }
 
@@ -193,7 +194,7 @@ export class Thumbnails extends EventBus<{ select: { patternId: string } }> {
 
       patternLink.href = `?pattern=${pattern.id}`;
       patternLink.setAttribute('data-pattern', pattern.id);
-      patternLink.title = pattern.name;
+      patternLink.title = pattern.displayName;
       
       patternLink.addEventListener('click', e => {
         e.preventDefault();
@@ -232,24 +233,23 @@ export class Thumbnails extends EventBus<{ select: { patternId: string } }> {
     const savedPatterns = Persistance.getSavedPatterns();
     if (savedPatterns.length) {
       this.#createThumbnailsSection(
-        'My Patterns',
+        i18n.t('thumb_my_patterns'),
         Persistance.getSavedPatterns(),
         target
       );
     }
     const patterns = getAllPatternsTypes();
-    this.#createThumbnailsSection('Built-in patterns', patterns, target);
+    this.#createThumbnailsSection(i18n.t('thumb_builtin_patterns'), patterns, target);
   }
 
   renderLandingGallery(container: HTMLElement) {
     container.innerHTML = '';
-    const savedPatterns = Persistance.getSavedPatterns();
     const patterns = getAllPatternsTypes();
 
     const renderCard = (pattern: StringArt<any>) => {
       const card = document.createElement('div');
       card.className = 'pattern_card';
-      card.title = pattern.name;
+      card.title = pattern.displayName;
       card.dataset.patternId = pattern.id;
 
       const preview = document.createElement('div');
@@ -257,7 +257,7 @@ export class Thumbnails extends EventBus<{ select: { patternId: string } }> {
 
       const label = document.createElement('div');
       label.className = 'label';
-      label.innerText = pattern.name;
+      label.innerText = pattern.displayName;
 
       card.appendChild(preview);
       card.appendChild(label);
@@ -298,6 +298,77 @@ export class Thumbnails extends EventBus<{ select: { patternId: string } }> {
     };
 
     patterns.forEach(renderCard);
+  }
+
+  renderSavedPatterns(container: HTMLElement) {
+    container.innerHTML = '';
+    const savedPatterns = Persistance.getSavedPatterns();
+
+    if (!savedPatterns.length) {
+      const emptyMsg = document.createElement('p');
+      emptyMsg.className = 'empty_msg';
+      emptyMsg.innerText = i18n.t('thumb_no_saved');
+      emptyMsg.style.textAlign = 'center';
+      emptyMsg.style.width = '100%';
+      emptyMsg.style.padding = '40px 0';
+      emptyMsg.style.fontWeight = '700';
+      container.appendChild(emptyMsg);
+      return;
+    }
+
+    const renderCard = (pattern: StringArt<any>) => {
+      const card = document.createElement('div');
+      card.className = 'pattern_card';
+      card.title = pattern.displayName;
+      card.dataset.patternId = pattern.id;
+
+      const preview = document.createElement('div');
+      preview.className = 'preview';
+
+      const label = document.createElement('div');
+      label.className = 'label';
+      label.innerText = pattern.displayName;
+
+      card.appendChild(preview);
+      card.appendChild(label);
+      container.appendChild(card);
+
+      const thumbnailConfig = pattern.thumbnailConfig;
+
+      pattern.assignConfig({
+        margin: 1,
+        nailRadius: 0.5,
+        showStrings: true,
+        showNails: false,
+        darkMode: false,
+        enableBackground: false,
+        ...(thumbnailConfig instanceof Function
+          ? thumbnailConfig(pattern.config)
+          : thumbnailConfig),
+      });
+
+      const rect = preview.getBoundingClientRect();
+      const size = rect.width || 120;
+
+      const renderer = new CanvasRenderer(preview, { updateOnResize: false });
+      renderer.setFixedSize([size, size]);
+
+      try {
+        pattern.draw(renderer);
+      } catch (error) {
+        console.error(`Failed to render thumbnail for ${pattern.id}`, error);
+      }
+
+      card.addEventListener('click', () => {
+        const freshPattern = findPatternById(pattern.id);
+        routing.navigateToPattern(freshPattern);
+        const dialog = document.getElementById('saved_patterns_dialog') as HTMLDialogElement;
+        if (dialog) {
+          dialog.close();
+        }
+      });
+    };
+
     savedPatterns.forEach(renderCard);
   }
 }

@@ -16,12 +16,12 @@ export interface HexagonSpadesConfig extends LeavesConfig {
 export default class HexagonSpades extends Leaves<HexagonSpadesConfig> {
   static type = 'hexagon_spades';
   id = 'hexagon_spades';
-  name = 'Hexagon Spades';
+  name = 'i18n:pattern_hexagon_spades';
   controls: ControlsConfig<HexagonSpadesConfig> = [
     ...leavesCommonControls,
     {
       key: 'mirrorTiling',
-      label: 'Mirror tiling',
+      label: 'i18n:pl_mirror_tiling',
       defaultValue: true,
       type: 'checkbox',
       isStructural: true,
@@ -29,14 +29,14 @@ export default class HexagonSpades extends Leaves<HexagonSpadesConfig> {
     },
     {
       key: 'crossWeave',
-      label: 'Cross weave',
+      label: 'i18n:pl_cross_weave',
       defaultValue: false,
       type: 'checkbox',
       isStructural: false,
     },
     {
       key: 'withSides',
-      label: 'With sides',
+      label: 'i18n:pl_with_sides',
       defaultValue: true,
       type: 'checkbox',
       isStructural: false,

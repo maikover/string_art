@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Generative String</title>
+    <meta charset="utf-8" />
+    <title data-i18n="app_name">Generative String</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <link type="text/css" rel="stylesheet" href="styles/index.css" />
     <script type="module" src="scripts/main.ts"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -50,26 +52,43 @@
       <header id="main_header">
         <a id="header_logo" href="/" style="text-decoration: none;">
           <h1 style="display: flex; align-items: center; gap: 12px; margin: 0;">
-            <img src="images/StringArtStudio_AppIcon_Final.svg" alt="Icon" style="height: 38px; width: 38px; border: 3px solid #000; box-shadow: 3px 3px 0px #000; background: #FF6B6B;" />
-            <div class="logo_text" style="display: flex; flex-direction: column; line-height: 0.95; font-family: var(--font-display); font-weight: 900; text-transform: uppercase;">
-              <span style="font-size: 20px; color: #000; -webkit-text-stroke: 1.5px #000; text-shadow: 2px 2px 0px #FFD93D; letter-spacing: -0.02em;">StringArt</span>
-              <span style="font-size: 14px; color: #FF6B6B; -webkit-text-stroke: 1px #000; text-shadow: 1.5px 1.5px 0px #000; letter-spacing: 0.05em; margin-top: 2px;">Studio</span>
+            <img src="images/StringArtStudio_AppIcon_Final.svg" alt="Icon" style="height: 38px; width: 38px; border: 3px solid #000; box-shadow: 3px 3px 0px #000; background: #FFD93D;" />
+            <div class="logo_text_container">
+              <span class="logo_text_main">StringArt</span>
+              <span class="logo_text_sub">Studio</span>
             </div>
           </h1>
         </a>
 
         <div class="header_controls pattern_only" hidden>
+          <button id="main_theme_toggle_btn" class="circular_btn" data-i18n-title="btn_theme_title" title="Cambiar tema">
+            <i class="icon-sun" id="main_theme_icon_light"></i>
+            <i class="icon-moon" id="main_theme_icon_dark" style="display:none"></i>
+          </button>
+          <button id="main_settings_btn" class="circular_btn" data-i18n-title="btn_settings_title" title="Configuración">
+            <i class="icon-options"></i>
+          </button>
           <button
             type="button"
             id="save_btn"
-            class="circular_btn non-default-config-only template-only"
+            class="circular_btn non-default-config-only"
+            data-i18n-title="btn_save_title"
             title="Save this pattern"
           >
             <i class="icon-diskette_b"></i>
           </button>
+          <button
+            type="button"
+            id="download_header_btn"
+            class="circular_btn"
+            data-i18n-title="btn_download_title"
+            title="Download"
+          >
+            <i class="icon-download"></i>
+          </button>
           <dropdown-menu id="pattern_menu" button-style="padding: 0">
             <span slot="label" class="circular_btn">
-              <i class="icon-options"></i>
+              <i class="icon-ellipsis"></i>
             </span>
             <dropdown-menu-item
               value="save"
@@ -77,61 +96,90 @@
               class="non-default-config-only non-template-only"
             >
               <i slot="icon" class="icon-diskette_b"></i>
-              Save
+              <span data-i18n="menu_save">Save</span>
             </dropdown-menu-item>
             <dropdown-menu-item value="save_as" class="non-default-config-only">
               <i slot="icon" class="icon-plus"></i>
-              Save as...</dropdown-menu-item
-            >
+              <span data-i18n="menu_save_as">Save as...</span>
+            </dropdown-menu-item>
             <dropdown-menu-item value="rename" class="non-template-only">
-              <i slot="icon" class="icon-pencil"></i> Rename</dropdown-menu-item
-            >
+              <i slot="icon" class="icon-pencil"></i>
+              <span data-i18n="menu_rename">Rename</span>
+            </dropdown-menu-item>
             <dropdown-menu-item value="delete" class="non-template-only">
               <i slot="icon" class="icon-trash"></i>
-              Delete</dropdown-menu-item
-            >
+              <span data-i18n="menu_delete">Delete</span>
+            </dropdown-menu-item>
+            <dropdown-menu-item value="reset">
+              <i slot="icon" class="icon-refresh"></i>
+              <span data-i18n="menu_reset">Reset to default</span>
+            </dropdown-menu-item>
             <dropdown-menu-separator
               class="non-template-only"
             ></dropdown-menu-separator>
 
-            <dropdown-menu-item value="download">
-              <i slot="icon" class="icon-download"></i>
-              Download</dropdown-menu-item>
             <dropdown-menu-item value="share" id="share_menu_item">
               <i slot="icon" class="icon-share"></i>
-              Share</dropdown-menu-item
-            >
+              <span data-i18n="menu_share">Share</span>
+            </dropdown-menu-item>
           </dropdown-menu>
-          <button
-            id="back_to_gallery_btn"
-            class="circular_btn"
-            title="Back to gallery"
-          >
-            <i class="icon-arrow_left"></i>
+        </div>
+      </header>
+      <!-- TOP BAR -->
+      <header id="top_bar">
+        <a id="header_logo" href="/" style="text-decoration: none;">
+          <img src="images/StringArtStudio_AppIcon_Final.svg" alt="Icon" style="height: 32px; width: 32px; border: 2px solid #000; box-shadow: 2px 2px 0px #000; background: #FFD93D;" />
+          <span class="logo_text" data-i18n="app_name">StringArt Studio</span>
+        </a>
+        <div class="top_bar_actions">
+          <button id="theme_toggle_btn" class="icon_btn" data-i18n-title="btn_theme_title" title="Cambiar tema">
+            <i class="icon-sun" id="theme_icon_light"></i>
+            <i class="icon-moon" id="theme_icon_dark" style="display:none"></i>
+          </button>
+          <button id="settings_btn" class="icon_btn" data-i18n-title="btn_settings_title" title="Configuración">
+            <i class="icon-options"></i>
           </button>
         </div>
       </header>
+
       <!-- LANDING / GALLERY VIEW -->
       <section id="landing_view">
-        <div class="landing_header">
-          <div class="landing_logo" style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
-            <img src="images/StringArtStudio_AppIcon_Final.svg" alt="StringArt Studio Icon" style="height: 140px; width: 140px; border: 6px solid #000; box-shadow: 10px 10px 0px #000; background: #FFD93D; margin-bottom: 8px;" />
-            <div style="display: flex; flex-direction: column; line-height: 0.85; font-family: var(--font-display); font-weight: 900; text-transform: uppercase; text-align: center;">
-              <span style="font-size: clamp(36px, 7vw, 64px); color: #000; -webkit-text-stroke: 3px #000; text-shadow: 6px 6px 0px #FFD93D; letter-spacing: -0.03em;">StringArt</span>
-              <span style="font-size: clamp(24px, 5vw, 40px); color: #FF6B6B; -webkit-text-stroke: 2px #000; text-shadow: 4px 4px 0px #000; letter-spacing: 0.05em; margin-top: 8px;">Studio</span>
-            </div>
+        <!-- HERO MODULE -->
+        <div class="hero_module">
+          <div class="hero_logo">
+            <img src="images/StringArtStudio_AppIcon_Final.svg" alt="StringArt Studio Icon" style="height: 100px; width: 100px; border: 4px solid #000; box-shadow: 6px 6px 0px #000; background: #FFD93D;" />
           </div>
-          <p class="landing_tagline">Design beautiful string art patterns</p>
+          <h1 class="hero_title" data-i18n="app_name">StringArt Studio</h1>
+          <p class="hero_description" data-i18n="app_tagline">Diseña patrones decorativos con cuerdas y clavos de forma creativa y sencilla</p>
+          <button id="saved_patterns_btn" class="hero_btn">
+            <i class="icon-bookmark"></i>
+            <span data-i18n="landing_saved_patterns">Patrones guardados</span>
+          </button>
         </div>
 
-        <div class="landing_gallery_header">
-          <h2 class="gallery_title">Pick a Pattern</h2>
-          <p class="gallery_subtitle">Choose a design to start creating</p>
+        <!-- PATTERNS GRID -->
+        <div class="patterns_section">
+          <h2 class="section_title" data-i18n="landing_section_title">Estilos de patrones</h2>
+          <div class="patterns_grid_wrap">
+            <div id="landing_patterns_container"></div>
+          </div>
         </div>
 
-        <div class="landing_gallery_wrap">
-          <div id="landing_patterns_container"></div>
-        </div>
+        <!-- FOOTER -->
+        <footer id="landing_footer">
+          <div class="footer_logo">
+            <img src="images/StringArtStudio_AppIcon_Final.svg" alt="StringArt Studio" style="height: 24px; width: 24px;" />
+            <span class="footer_app_name" data-i18n="app_name">StringArt Studio</span>
+          </div>
+          <div class="footer_links">
+            <button class="footer_link" id="btn_terms" data-i18n="footer_terms">Términos</button>
+            <button class="footer_link" id="btn_privacy" data-i18n="footer_privacy">Privacidad</button>
+            <button class="footer_link" id="btn_license" data-i18n="footer_license">Licencia</button>
+            <button class="footer_link" id="btn_help" data-i18n="footer_help">Ayuda</button>
+            <button class="footer_link footer_link_rate" id="btn_rate" data-i18n="footer_rate">Calificar</button>
+          </div>
+          <span class="footer_copyright">&copy; 2026 <span data-i18n="app_name">StringArt Studio</span></span>
+        </footer>
       </section>
       <form id="design" class="noprint open">
         <div class="expandable_handle" title="Drag to resize">▲</div>
@@ -146,7 +194,7 @@
             <i class="icon-thread"></i>
           </a>
           <a href="#control_nails" class="controls_menu_item circular_btn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
               <rect x="8" y="2" width="8" height="4" rx="1" />
               <path d="M12 6v14" />
               <path d="M10 20l2 2 2-2" />
@@ -165,8 +213,8 @@
         </div>
       </form>
       <div id="info" class="pattern_only noprint">
-        <h3 class="small_title">Info</h3>
-        <label for="info_dimensions_select">Size:</label>
+        <h3 class="small_title" data-i18n="info_title">Info</h3>
+        <label for="info_dimensions_select" data-i18n="info_size">Size:</label>
         <select id="info_dimensions_select"></select>
         <dimensions-input
           id="info_dimensions"
@@ -188,20 +236,20 @@
         <span id="info_size_range_display"></span>
         <dl class="info__data">
           <div>
-            <dt>Nails count</dt>
+            <dt data-i18n="info_nails_count">Nails count</dt>
             <dd><span id="nails_count"></span></dd>
           </div>
           <div>
-            <dt>Max density</dt>
+            <dt data-i18n="info_max_density">Max density</dt>
             <dd id="closest_distance_between_nails"></dd>
           </div>
         </dl>
-        <h4>Thread length <i class="icon-thread" style="margin-left: 8px;"></i></h4>
+        <h4><span data-i18n="info_thread_length">Thread length</span> <i class="icon-thread" style="margin-left: 8px;"></i></h4>
         <dl class="info__data">
-          <dt>Total length</dt>
+          <dt data-i18n="info_total_length">Total length</dt>
           <dd><span id="threads_total_length"></span></dd>
         </dl>
-        <h5>Length per color:</h5>
+        <h5 data-i18n="info_length_per_color">Length per color:</h5>
         <ul id="threads_per_color"></ul>
       </div>
       <article id="canvas_panel" class="pattern_only"></article>
@@ -226,12 +274,11 @@
         </div>
         <div id="player_steps" class="player_controls">
           <div id="player_steps_controls">
-            <button id="player_start_btn" class="circular_btn" hidden>
-              Start
-            </button>
+            <button id="player_start_btn" class="circular_btn" hidden data-i18n="player_start">Start</button>
             <button
               id="player_prev_btn"
               class="circular_btn"
+              data-i18n-title="player_back_step"
               title="Back one step"
             >
               <i class="icon-step_back"></i>
@@ -250,6 +297,7 @@
             <button
               id="player_next_btn"
               class="circular_btn"
+              data-i18n-title="player_forward_step"
               title="Forward one step"
             >
               <i class="icon-step_forward"></i>
@@ -259,6 +307,7 @@
             <button
               id="player_instructions_toggle_btn"
               class="circular_btn"
+              data-i18n-title="player_close"
               title="Close"
             >
               <i class="icon-x"></i>
@@ -270,8 +319,156 @@
       <download-instructions-dialog
         id="download_instructions_dialog"
       ></download-instructions-dialog>
+      <dialog id="settings_dialog">
+        <div id="settings_dialog_wrapper">
+          <!-- Header Bar -->
+          <div class="settings_header">
+            <div class="settings_header_title_wrap">
+              <div class="settings_title_icon_box">
+                <i class="icon-cog"></i>
+              </div>
+              <h2 class="settings_title" data-i18n="settings_title">CONFIGURACIÓN</h2>
+            </div>
+            <button class="settings_close_btn" type="button" data-i18n-aria-label="settings_close_aria" aria-label="Close settings" onclick="document.getElementById('settings_dialog').close()">
+              <i class="icon-x"></i>
+            </button>
+          </div>
+          
+          <!-- Content Body -->
+          <div class="settings_body">
+            <!-- Section 1: PREMIUM -->
+            <div class="settings_section">
+              <div class="settings_section_title_wrap">
+                <div class="settings_section_icon_box premium_icon">
+                  <i class="icon-crown"></i>
+                </div>
+                <h3 class="settings_section_title" data-i18n="settings_premium">PREMIUM</h3>
+              </div>
+              
+              <div class="premium_card">
+                <div class="premium_card_text">
+                  <div class="premium_card_title" data-i18n="settings_premium_active">Premium Activo</div>
+                  <div class="premium_card_subtitle" data-i18n="settings_premium_subtitle">Acceso ilimitado</div>
+                </div>
+                <div class="pro_badge" data-i18n="settings_pro_badge">PRO</div>
+              </div>
+              
+              <button id="restore_purchases_btn" class="settings_action_btn">
+                <i class="icon-undo"></i>
+                <span data-i18n="settings_restore_purchases">RESTAURAR COMPRAS</span>
+              </button>
+              
+              <button id="rate_app_btn" class="settings_action_btn">
+                <i class="icon-star" style="color: #FFD93D;"></i>
+                <span data-i18n="settings_rate_app">CALIFICAR APP</span>
+              </button>
+            </div>
+            
+            <hr class="settings_divider" />
+            
+            <!-- Section 2: TEMA -->
+            <div class="settings_section">
+              <div class="settings_section_title_wrap">
+                <div class="settings_section_icon_box theme_icon">
+                  <i class="icon-sun"></i>
+                </div>
+                <h3 class="settings_section_title" data-i18n="settings_theme">TEMA</h3>
+              </div>
+              
+              <div class="theme_segmented_control">
+                <button id="theme_btn_light" class="theme_option_btn" data-theme-val="light">
+                  <i class="icon-sun"></i>
+                  <span data-i18n="settings_theme_light">CLARO</span>
+                </button>
+                <button id="theme_btn_dark" class="theme_option_btn" data-theme-val="dark">
+                  <i class="icon-moon"></i>
+                  <span data-i18n="settings_theme_dark">OSCURO</span>
+                </button>
+                <button id="theme_btn_system" class="theme_option_btn" data-theme-val="system">
+                  <i class="icon-desktop"></i>
+                  <span data-i18n="settings_theme_system">SISTEMA</span>
+                </button>
+              </div>
+            </div>
+            
+            <hr class="settings_divider" />
+            
+            <!-- Section 3: IDIOMA -->
+            <div class="settings_section">
+              <div class="settings_section_title_wrap">
+                <div class="settings_section_icon_box lang_icon">
+                  <i class="icon-globe"></i>
+                </div>
+                <h3 class="settings_section_title" data-i18n="settings_language">IDIOMA</h3>
+              </div>
+              
+              <button type="button" class="lang_select_btn" id="lang_select_btn" aria-label="Seleccionar idioma">
+                <span class="lang_select_flag" id="lang_select_flag">🌐</span>
+                <span class="lang_select_label" id="lang_select_label">Sistema</span>
+                <i class="icon-caret_down lang_select_arrow" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </dialog>
+
+      <dialog id="saved_patterns_dialog">
+        <div id="dialog_wrapper">
+          <button class="btn-close-icon" type="button" aria-label="Close dialog" onclick="document.getElementById('saved_patterns_dialog').close()">
+            <i class="icon-x"></i>
+          </button>
+          <h2 class="dialog-title" data-i18n="saved_patterns_title">Patrones guardados</h2>
+          <div id="saved_patterns_container" class="patterns_grid_wrap"></div>
+        </div>
+      </dialog>
+
+      <!-- LANGUAGE SELECTION DIALOG -->
+      <dialog id="language_dialog" class="language_dialog">
+        <div class="language_dialog_wrapper">
+          <div class="language_dialog_topbar">
+            <button class="language_back_btn" type="button" aria-label="Cerrar">
+              <span class="language_back_arrow">←</span>
+              <span class="language_back_label" data-i18n="legal_back_label">ATRÁS</span>
+            </button>
+            <h2 class="language_topbar_title" data-i18n="settings_language">IDIOMA</h2>
+          </div>
+          <div class="language_dialog_body">
+            <div class="language_hero language_hero--yellow">
+              <div class="language_hero_icon" aria-hidden="true">🌐</div>
+              <div class="language_hero_text">
+                <h1 class="language_hero_title" data-i18n="language_hero_title">SELECCIONAR IDIOMA</h1>
+                <p class="language_hero_subtitle" data-i18n="language_hero_subtitle">Elige tu idioma preferido</p>
+              </div>
+            </div>
+            <div class="language_content" id="language_dialog_content"></div>
+          </div>
+        </div>
+      </dialog>
+
+      <!-- LEGAL & HELP DIALOGS -->
+      <dialog id="legal_dialog" class="legal_dialog">
+        <div class="legal_dialog_wrapper">
+          <div class="legal_dialog_topbar">
+            <button class="legal_back_btn" type="button" data-i18n-aria-label="legal_back_aria" aria-label="Atrás">
+              <span class="legal_back_arrow">←</span>
+              <span class="legal_back_label" data-i18n="legal_back_label">ATRÁS</span>
+            </button>
+            <h2 class="legal_topbar_title" id="legal_dialog_topbar_title" data-i18n="help_topbar">AYUDA Y FAQ</h2>
+          </div>
+          <div class="legal_dialog_body">
+            <div class="legal_hero" id="legal_dialog_hero">
+              <div class="legal_hero_icon" aria-hidden="true" data-i18n="help_icon">?</div>
+              <div class="legal_hero_text">
+                <h1 class="legal_hero_title" id="legal_dialog_title" data-i18n="help_hero">CENTRO DE AYUDA</h1>
+                <p class="legal_hero_subtitle" data-i18n="legal_subtitle">EASY STRINGART</p>
+              </div>
+            </div>
+            <div class="legal_content" id="legal_dialog_content"></div>
+          </div>
+        </div>
+      </dialog>
 
     </main>
-    <noscript>Please enable JavaScript to run this app!</noscript>
+    <noscript data-i18n="noscript_msg">Please enable JavaScript to run this app!</noscript>
   </body>
 </html>

@@ -31,14 +31,14 @@ export default class Mandala<TCustomConfig = void> extends StringArt<
 > {
   static type = 'mandala';
 
-  name = 'Mandala';
+  name = 'i18n:pattern_mandala';
   id = 'mandala';
   link = 'https://www.youtube.com/watch?v=qhbuKbxJsk8';
   linkText = 'Learn';
   controls: ControlsConfig<MandalaConfig & TCustomConfig> = [
     {
       key: 'n',
-      label: 'Number of nails',
+      label: 'i18n:pl_number_of_nails',
       defaultValue: 180,
       type: 'range',
       attr: { min: 3, max: 400, step: 1 },
@@ -46,7 +46,7 @@ export default class Mandala<TCustomConfig = void> extends StringArt<
     },
     {
       key: 'base',
-      label: 'Multiplication',
+      label: 'i18n:pl_multiplication',
       defaultValue: 2,
       type: 'range',
       attr: { min: 2, max: 99, step: 1 },
@@ -54,7 +54,7 @@ export default class Mandala<TCustomConfig = void> extends StringArt<
     },
     {
       key: 'layers',
-      label: 'Layers',
+      label: 'i18n:pl_layers',
       defaultValue: 7,
       type: 'range',
       attr: { min: 1, max: 20, step: 1 },

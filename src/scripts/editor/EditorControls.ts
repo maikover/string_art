@@ -4,6 +4,7 @@ import StringArtHueInput from '../components/inputs/StringArtHueInput';
 import StringArtRangeInput from '../components/inputs/StringArtRangeInput';
 import { toggleHide, unHide } from '../helpers/dom_utils';
 import EventBus from '../helpers/EventBus';
+import i18n from '../i18n';
 import type {
   Config,
   ConfigValueOrFunction,
@@ -102,6 +103,12 @@ export default class EditorControls<TConfig extends Config> extends EventBus<{
     elements.design.addEventListener('keydown', this.#toggleFieldSetOnEnter);
     this.controlElements = {};
     this.renderControls();
+
+    // Re-render labels when the active locale changes
+    i18n.addEventListener('change', () => {
+      this.renderControls();
+      this.updateControlsLabels();
+    });
 
     const menu = document.querySelector('#controls_menu');
     const controlsPanel = document.querySelector('#controls_panel');
@@ -400,7 +407,7 @@ export default class EditorControls<TConfig extends Config> extends EventBus<{
       if (control.label instanceof Function) {
         const { label: labelEl, element } = this.controlElements[control.key];
 
-        const labelText = control.label(this.config);
+        const labelText = trConfigValue(control.label(this.config));
         if (control.type === 'checkbox') {
           element.setAttribute('label', labelText);
         } else if (control.type === 'group') {
@@ -594,12 +601,26 @@ export default class EditorControls<TConfig extends Config> extends EventBus<{
     valueOrFn: ConfigValueOrFunction<TConfig, T>,
     config: Config<TConfig>
   ): T {
+    let val: T;
     if (valueOrFn instanceof Function) {
-      return valueOrFn(config);
+      val = valueOrFn(config);
+    } else {
+      val = valueOrFn;
     }
-
-    return valueOrFn;
+    return trConfigValue(val);
   }
+}
+
+/**
+ * If a string starts with 'i18n:' the rest is treated as a translation key.
+ * Used by the editor to render configControl labels in the active locale.
+ * Dynamic values returned from label functions also pass through this.
+ */
+function trConfigValue<T>(val: T): T {
+  if (typeof val === 'string' && val.startsWith('i18n:')) {
+    return i18n.t(val.slice(5)) as unknown as T;
+  }
+  return val;
 }
 
 function getInputValue(inputElement: EventTarget) {

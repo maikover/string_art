@@ -17,6 +17,8 @@ import DanceOfPlanets from './string_art_types/DanceOfPlanets.pattern';
 import Crosses from './string_art_types/Crosses.pattern';
 import HexagonSpades from './string_art_types/HexagonSpades.pattern';
 import StarOfDavid from './string_art_types/StarOfDavid.pattern';
+import DynamicVortex from './string_art_types/Vortex.pattern';
+import Dreamcatcher from './string_art_types/Dreamcatcher.pattern';
 
 const patternTypes = [
   Star,
@@ -38,6 +40,8 @@ const patternTypes = [
   Crosses,
   HexagonSpades,
   StarOfDavid,
+  DynamicVortex,
+  Dreamcatcher,
 ];
 
 export default patternTypes;

@@ -44,12 +44,12 @@ interface TCalc {
 export default class Lotus extends StringArt<LotusConfig, TCalc> {
   static type = 'lotus';
 
-  name = 'Lotus';
+  name = 'i18n:pattern_lotus';
   id = 'lotus';
   controls: ControlsConfig<LotusConfig> = [
     {
       key: 'sides',
-      label: 'Sides',
+      label: 'i18n:pl_sides',
       description: 'How many petals there are in the Lotus',
       type: 'range',
       defaultValue: 18,
@@ -62,7 +62,7 @@ export default class Lotus extends StringArt<LotusConfig, TCalc> {
     },
     {
       key: 'density',
-      label: 'Density',
+      label: 'i18n:pl_density',
       type: 'range',
       defaultValue: 15,
       attr: {
@@ -75,7 +75,7 @@ export default class Lotus extends StringArt<LotusConfig, TCalc> {
     withoutAttribute(Circle.rotationConfig, 'snap'),
     {
       key: 'removeSections',
-      label: 'Remove sections',
+      label: 'i18n:pl_remove_sections',
       type: 'range',
       attr: {
         min: 0,
@@ -92,14 +92,14 @@ export default class Lotus extends StringArt<LotusConfig, TCalc> {
     },
     {
       key: 'renderCenter',
-      label: 'Render center',
+      label: 'i18n:pl_render_center',
       type: 'checkbox',
       defaultValue: true,
       isStructural: true,
     },
     {
       key: 'centerRadius',
-      label: 'Center radius',
+      label: 'i18n:pl_center_radius',
       type: 'range',
       defaultValue: 1,
       attr: {
@@ -114,7 +114,7 @@ export default class Lotus extends StringArt<LotusConfig, TCalc> {
     },
     {
       key: 'renderCenterNails',
-      label: 'Render center nails',
+      label: 'i18n:pl_render_center_nails',
       type: 'checkbox',
       defaultValue: false,
       isStructural: true,

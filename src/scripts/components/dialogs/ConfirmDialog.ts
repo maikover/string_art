@@ -111,14 +111,18 @@ export default class ConfirmDialog extends HTMLElement {
    * Opens the dialog, optionally with an initial value.
    */
   show(onShow?: () => void): Promise<void> {
+    console.log('[ConfirmDialog] show() called');
     this.dialog.showModal();
     onShow?.();
     return new Promise((resolve, reject) => {
       const handleClose = () => {
         this.dialog.removeEventListener('close', handleClose);
+        console.log('[ConfirmDialog] closed, returnValue:', this.dialog.returnValue);
         if (this.dialog.returnValue === 'confirm') {
+          console.log('[ConfirmDialog] resolving');
           resolve();
         } else {
+          console.log('[ConfirmDialog] rejecting');
           reject();
         }
       };

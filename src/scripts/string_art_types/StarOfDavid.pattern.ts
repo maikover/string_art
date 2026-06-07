@@ -13,12 +13,12 @@ export interface StarOfDavidConfig extends LeavesConfig {
 export default class StarOfDavid extends Leaves<StarOfDavidConfig> {
   static type = 'star_of_david';
   id = 'star_of_david';
-  name = 'Star of David';
+  name = 'i18n:pattern_star_of_david';
   controls: ControlsConfig<StarOfDavidConfig> = [
     ...leavesCommonControls,
     {
       key: 'mirrorTiling',
-      label: 'Mirror tiling',
+      label: 'i18n:pl_mirror_tiling',
       defaultValue: false,
       type: 'checkbox',
       isStructural: true,

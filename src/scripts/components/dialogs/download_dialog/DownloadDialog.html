@@ -1,5 +1,5 @@
 <confirm-dialog
-  dialog-title="Download image"
+  dialog-title="Download"
   submit="Download"
   submit-icon="download"
   centered
@@ -8,21 +8,28 @@
   <div id="wrapper">
     <form>
       <fieldset>
-        <label for="type">Type</label>
+        <label for="type" data-i18n="dl_type">Type</label>
         <div class="radio-list">
           <input type="radio" name="type" id="type_all" value="all" checked />
-          <label for="type_all">Image</label>
+          <label for="type_all" data-i18n="dl_type_image">Image</label>
           <input
             type="radio"
             name="type"
             id="type_nails_map"
             value="nails_map"
           />
-          <label for="type_nails_map">Nails map 🔨</label>
+          <label for="type_nails_map" data-i18n="dl_type_nails_map">Nails map <i class="icon-hammer"></i></label>
+          <input
+            type="radio"
+            name="type"
+            id="type_video"
+            value="video"
+          />
+          <label for="type_video" data-i18n="format_video">Video <i class="icon-play"></i></label>
         </div>
       </fieldset>
-      <label for="size">Image size</label>
-      <section>
+      <label for="size" data-i18n="dl_image_size">Image size</label>
+      <section id="size_block">
         <div style="flex: 0">
           <select
             id="size"
@@ -61,7 +68,7 @@
         </div>
       </section>
       <section>
-        <label for="pattern_size">Pattern size</label>
+        <label for="pattern_size" data-i18n="dl_pattern_size">Pattern size</label>
         <dimensions-input
           id="pattern_size"
           name="pattern_dimensions"
@@ -73,7 +80,7 @@
         </select>
       </section>
       <section>
-        <label for="margin">Margin</label>
+        <label for="margin" data-i18n="dl_margin">Margin</label>
         <input
           type="number"
           id="margin"
@@ -90,7 +97,7 @@
           <option value="px">px</option>
         </select>
       </section>
-      <div style="margin-top: 1.5em">
+      <div style="margin-top: 1.5em" id="more_options_block">
         <expandable-panel legend="More options" minimized>
           <fieldset class="dialog-checkbox" hidden id="render_numbers_block">
             <string-art-checkbox
@@ -102,7 +109,7 @@
           </fieldset>
 
           <fieldset id="dpi_block">
-            <label for="dpi">Print resolution</label>
+            <label for="dpi" data-i18n="dl_print_res">Print resolution</label>
             <select
               id="dpi"
               value="300"
@@ -121,11 +128,11 @@
               <option value="2400">2400</option>
               <option value="2880">2880</option>
             </select>
-            <label for="dpi" style="display: inline">DPI</label>
+            <label for="dpi" style="display: inline" data-i18n="dl_dpi">DPI</label>
           </fieldset>
-          <fieldset>
+          <fieldset id="format_block">
             <section>
-              <label for="format">Image type</label>
+              <label for="format" data-i18n="dl_image_type">Image type</label>
               <select
                 id="format"
                 class="dialog-input"
@@ -151,7 +158,7 @@
       </div>
     </form>
     <div id="preview">
-      Preview
+      <span data-i18n="dl_preview">Preview</span>
       <article id="canvas"></article>
     </div>
   </div>

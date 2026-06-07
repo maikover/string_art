@@ -65,17 +65,17 @@ interface TCalc {
 export default class Assymetry extends StringArt<AssymetryConfig, TCalc> {
   static type = 'assymetry';
 
-  name = 'Assymetry';
+  name = 'i18n:pattern_assymetry';
   id = 'assymetry';
   link =
     'https://www.etsy.com/il-en/listing/1018950430/calming-wall-art-in-light-blue-for';
   controls: ControlsConfig<AssymetryConfig> = [
-    { ...Circle.nailsConfig, label: 'Circle number of nails' },
+    { ...Circle.nailsConfig, label: 'i18n:pl_circle_number_of_nails' },
     Circle.rotationConfig,
     Circle.distortionConfig,
     {
       key: 'layers',
-      label: 'Layers',
+      label: 'i18n:pl_layers',
       type: 'group',
       // @ts-expect-error: dynamic key is safe because we know the keys match Layers
       children: LAYER_DEFAULTS.map(({ start, end, color, reverse }, i) => {
@@ -87,14 +87,14 @@ export default class Assymetry extends StringArt<AssymetryConfig, TCalc> {
           children: [
             {
               key: `show${layer}`,
-              label: 'Enable',
+              label: 'i18n:pl_enable',
               defaultValue: true,
               type: 'checkbox',
               isStructural: true,
             },
             {
               key: `start${layer}`,
-              label: 'Star position',
+              label: 'i18n:pl_star_position',
               defaultValue: start,
               type: 'range',
               attr: {
@@ -109,7 +109,7 @@ export default class Assymetry extends StringArt<AssymetryConfig, TCalc> {
             },
             {
               key: `end${layer}`,
-              label: 'End Position',
+              label: 'i18n:pl_end_position',
               defaultValue: end,
               type: 'range',
               attr: {
@@ -125,7 +125,7 @@ export default class Assymetry extends StringArt<AssymetryConfig, TCalc> {
             },
             {
               key: `color${layer}`,
-              label: 'Color',
+              label: 'i18n:pl_color',
               defaultValue: color,
               type: 'color',
               show: config => config[`show${layer}`],
@@ -134,7 +134,7 @@ export default class Assymetry extends StringArt<AssymetryConfig, TCalc> {
             },
             {
               key: `reverse${layer}`,
-              label: 'Reverse',
+              label: 'i18n:pl_reverse',
               defaultValue: reverse === true,
               type: 'checkbox',
               show: config => config[`show${layer}`],

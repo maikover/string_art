@@ -49,12 +49,12 @@ interface TCalc {
 export default class Sun extends StringArt<SunConfig, TCalc> {
   static type = 'sun';
 
-  name = 'Sun';
+  name = 'i18n:pattern_sun';
   id = 'sun';
   controls: ControlsConfig<SunConfig> = [
     {
       key: 'starGroup',
-      label: 'Star',
+      label: 'i18n:pl_star',
       type: 'group',
       children: [
         ...insertAfter<SunConfig>(
@@ -80,7 +80,7 @@ export default class Sun extends StringArt<SunConfig, TCalc> {
           [
             {
               key: 'layers',
-              label: 'Layers',
+              label: 'i18n:pl_layers',
               defaultValue: 4,
               type: 'range',
               attr: {
@@ -92,7 +92,7 @@ export default class Sun extends StringArt<SunConfig, TCalc> {
             },
             {
               key: 'layerSpread',
-              label: 'Layer spread',
+              label: 'i18n:pl_layer_spread',
               defaultValue: 0.1625,
               type: 'range',
               displayValue: ({ layerSpread }) =>
@@ -107,7 +107,7 @@ export default class Sun extends StringArt<SunConfig, TCalc> {
             },
             {
               key: 'starRadius',
-              label: 'Star Radius',
+              label: 'i18n:pl_star_radius',
               defaultValue: 1,
               type: 'range',
               displayValue: ({ starRadius }) =>
@@ -126,12 +126,12 @@ export default class Sun extends StringArt<SunConfig, TCalc> {
     },
     {
       key: 'backdrop',
-      label: 'Backdrop',
+      label: 'i18n:pl_backdrop',
       type: 'group',
       children: [
         {
           key: 'backdropSize',
-          label: 'Backdrop size',
+          label: 'i18n:pl_backdrop_size',
           defaultValue: 0.5,
           type: 'range',
           displayValue: ({ backdropSize }) =>
@@ -145,7 +145,7 @@ export default class Sun extends StringArt<SunConfig, TCalc> {
         },
         {
           key: 'backdropRadius',
-          label: 'Backdrop radius',
+          label: 'i18n:pl_backdrop_radius',
           defaultValue: 1,
           type: 'range',
           displayValue: ({ backdropRadius }) =>
@@ -160,7 +160,7 @@ export default class Sun extends StringArt<SunConfig, TCalc> {
         },
         {
           key: 'backdropShift',
-          label: 'Backdrop shift',
+          label: 'i18n:pl_backdrop_shift',
           defaultValue: 0,
           type: 'range',
           displayValue: ({ backdropShift }) =>
@@ -177,7 +177,7 @@ export default class Sun extends StringArt<SunConfig, TCalc> {
         },
         {
           key: 'backdropSkip',
-          label: 'Backdrop skip',
+          label: 'i18n:pl_backdrop_skip',
           description:
             "If yes, connections in the backdrop are from the backdrop's nail to the second-nearest side, not the ones near it",
           defaultValue: false,
@@ -231,7 +231,7 @@ export default class Sun extends StringArt<SunConfig, TCalc> {
       [
         {
           key: 'backdropNailsColor',
-          label: 'Backdrop nails color',
+          label: 'i18n:pl_backdrop_nails_color',
           type: 'color',
           defaultValue: '#ffffff',
           show: ({ showNails }) => showNails,
@@ -239,7 +239,7 @@ export default class Sun extends StringArt<SunConfig, TCalc> {
         },
         {
           key: 'backdropNailsRadius',
-          label: 'Backdrop nails radius',
+          label: 'i18n:pl_backdrop_nails_radius',
           type: 'range',
           defaultValue: 1.5,
           attr: { min: 0.5, max: 5, step: 0.25 },

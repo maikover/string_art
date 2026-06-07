@@ -45,14 +45,14 @@ interface TCalc {
 export default class MaurerRose extends StringArt<MaurerRoseConfig, TCalc> {
   static type = 'maurer_rose';
 
-  name = 'Maurer Rose';
+  name = 'i18n:pattern_maurer_rose';
   id = 'maurer_rose';
   link = 'https://blog.glitch.land/en/posts/maurer-rose/';
   linkText = 'Learn';
   controls: ControlsConfig<MaurerRoseConfig> = [
     {
       key: 'n',
-      label: 'N',
+      label: 'i18n:pl_n',
       defaultValue: 4,
       type: 'range',
       attr: {
@@ -64,7 +64,7 @@ export default class MaurerRose extends StringArt<MaurerRoseConfig, TCalc> {
     },
     {
       key: 'maxSteps',
-      label: 'Max steps',
+      label: 'i18n:pl_max_steps',
       defaultValue: 512,
       type: 'range',
       attr: {
@@ -76,7 +76,7 @@ export default class MaurerRose extends StringArt<MaurerRoseConfig, TCalc> {
     },
     {
       key: 'angle',
-      label: 'Angle',
+      label: 'i18n:pl_angle',
       defaultValue: 341,
       type: 'range',
       attr: {

@@ -39,14 +39,14 @@ interface TCalc {
 class Eye extends StringArt<EyeConfig, TCalc> {
   static type = 'eye';
 
-  name = 'Vortex';
+  name = 'i18n:pattern_eye';
   id = 'eye';
   link =
     'https://www.etsy.com/listing/489853161/rose-of-space-string-art-sacred-geometry?ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=string+art&ref=sr_gallery_1&epik=dj0yJnU9WXNpM1BDTnNkLVBtcWdCa3AxN1J5QUZRY1FlbkJ5Z18mcD0wJm49ZXdJb2JXZmVpNVVwN1NKQ3lXMy10ZyZ0PUFBQUFBR0ZuUzZv';
   controls: ControlsConfig<EyeConfig> = [
     {
       key: 'n',
-      label: 'Number of nails per side',
+      label: 'i18n:pl_number_of_nails_per_side',
       defaultValue: 82,
       type: 'range',
       attr: { min: 3, max: 200, step: 1 },
@@ -54,7 +54,7 @@ class Eye extends StringArt<EyeConfig, TCalc> {
     },
     {
       key: 'sides',
-      label: 'Sides',
+      label: 'i18n:pl_sides',
       defaultValue: 4,
       type: 'range',
       attr: { min: 3, max: 10, step: 1 },
@@ -62,7 +62,7 @@ class Eye extends StringArt<EyeConfig, TCalc> {
     },
     {
       key: 'layers',
-      label: 'Layers',
+      label: 'i18n:pl_layers',
       defaultValue: 13,
       type: 'range',
       attr: { min: 1, max: 20, step: 1 },
@@ -70,7 +70,7 @@ class Eye extends StringArt<EyeConfig, TCalc> {
     },
     {
       key: 'angle',
-      label: 'Layer angle',
+      label: 'i18n:pl_layer_angle',
       defaultValue: 0.65,
       displayValue: ({ angle, sides }) =>
         `${Math.round((180 * angle) / sides)}°`,
@@ -94,7 +94,7 @@ class Eye extends StringArt<EyeConfig, TCalc> {
       customControls: [
         {
           key: 'colorPerLayer',
-          label: 'Color per layer',
+          label: 'i18n:pl_color_per_layer',
           defaultValue: false,
           type: 'checkbox',
           show: ({ isMultiColor }) => isMultiColor,

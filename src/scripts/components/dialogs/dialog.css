@@ -88,7 +88,11 @@ dialog.error .dialog-title {
 
 /* Neo-brutalist dialog buttons */
 .dialog-menu button {
-  padding: 10px 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 20px;
   margin-inline-start: 0.5em;
   font-size: 1em;
   font-weight: 700;
@@ -101,6 +105,8 @@ dialog.error .dialog-title {
   letter-spacing: 0.05em;
   box-shadow: var(--shadow-sm);
   transition: var(--transition-smooth);
+  white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .dialog-menu button:hover {
@@ -140,9 +146,7 @@ dialog.error .dialog-menu button.btn-submit {
 }
 
 .dialog-menu button > i {
-  margin-inline-end: 4px;
-  vertical-align: middle;
-  transform: translateY(-2px);
+  margin-inline-end: 8px;
   display: inline-block;
 }
 

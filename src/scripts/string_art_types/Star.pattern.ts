@@ -34,14 +34,14 @@ type TCalc = {
 export default class Star extends StringArt<StarConfig, TCalc> {
   static type = 'star';
 
-  name = 'Star';
+  name = 'i18n:pattern_star';
   id = 'star';
   link =
     'https://www.etsy.com/listing/557818258/string-art-meditation-geometric-yoga?epik=dj0yJnU9Mm1hYmZKdks1eTc3bVY2TkVhS2p2Qlg0N2dyVWJxaTEmcD0wJm49MGlWSXE1SVJ2Vm0xZ0xtaGhITDBWQSZ0PUFBQUFBR0Zwd2lj';
   controls: ControlsConfig<StarConfig> = [
     {
       key: 'sides',
-      label: 'Sides',
+      label: 'i18n:pl_sides',
       defaultValue: 3,
       type: 'range',
       attr: { min: 3, max: 20, step: 1 },
@@ -49,7 +49,7 @@ export default class Star extends StringArt<StarConfig, TCalc> {
     },
     {
       key: 'sideNails',
-      label: 'Nails per side',
+      label: 'i18n:pl_nails_per_side',
       defaultValue: 40,
       type: 'range',
       attr: { min: 2, max: 200, step: 1 },
@@ -59,7 +59,7 @@ export default class Star extends StringArt<StarConfig, TCalc> {
     StarShape.centerRadiusConfig,
     {
       key: 'ringSize',
-      label: 'Outer ring size',
+      label: 'i18n:pl_outer_ring_size',
       defaultValue: 0.1,
       type: 'range',
       attr: {
@@ -75,7 +75,7 @@ export default class Star extends StringArt<StarConfig, TCalc> {
     Circle.distortionConfig,
     {
       key: 'renderStar',
-      label: 'Show star',
+      label: 'i18n:pl_show_star',
       type: 'checkbox',
       defaultValue: true,
       affectsNails: false,
@@ -83,12 +83,12 @@ export default class Star extends StringArt<StarConfig, TCalc> {
     },
     {
       key: 'colorGroup',
-      label: 'Color',
+      label: 'i18n:pl_color',
       type: 'group',
       children: [
         {
           key: 'isSingleColor',
-          label: 'Is single color',
+          label: 'i18n:pl_is_single_color',
           type: 'checkbox',
           defaultValue: false,
           affectsNails: false,
@@ -96,7 +96,7 @@ export default class Star extends StringArt<StarConfig, TCalc> {
         },
         {
           key: 'singleColor',
-          label: 'Color',
+          label: 'i18n:pl_color',
           defaultValue: '#2ec0ff',
           type: 'color',
           affectsNails: false,
@@ -105,7 +105,7 @@ export default class Star extends StringArt<StarConfig, TCalc> {
         },
         {
           key: 'innerColor',
-          label: 'Star color',
+          label: 'i18n:pl_star_color',
           defaultValue: '#2ec0ff',
           type: 'color',
           affectsNails: false,
@@ -114,7 +114,7 @@ export default class Star extends StringArt<StarConfig, TCalc> {
         },
         {
           key: 'outerColor',
-          label: 'Outter color',
+          label: 'i18n:pl_outer_color',
           defaultValue: '#2a82c6',
           type: 'color',
           affectsNails: false,
@@ -123,7 +123,7 @@ export default class Star extends StringArt<StarConfig, TCalc> {
         },
         {
           key: 'ringColor',
-          label: 'Ring color',
+          label: 'i18n:pl_ring_color_label',
           defaultValue: '#2ec0ff',
           type: 'color',
           affectsNails: false,

@@ -41,13 +41,13 @@ type TCalc = {
 export default class Flower extends StringArt<FlowerConfig, TCalc> {
   static type = 'flower';
 
-  name = 'Flower';
+  name = 'i18n:pattern_flower';
   id = 'flower';
   link = 'https://www.sqrt.ch/Buch/fadenmodell4_100.svg';
   controls: ControlsConfig<FlowerConfig> = [
     {
       key: 'sides',
-      label: 'Sides',
+      label: 'i18n:pl_sides',
       defaultValue: 4,
       type: 'range',
       attr: {
@@ -59,7 +59,7 @@ export default class Flower extends StringArt<FlowerConfig, TCalc> {
     },
     {
       key: 'n',
-      label: 'Nails per side',
+      label: 'i18n:pl_nails_per_side',
       defaultValue: 60,
       type: 'range',
       attr: {
@@ -71,7 +71,7 @@ export default class Flower extends StringArt<FlowerConfig, TCalc> {
     },
     {
       key: 'layers',
-      label: 'Layers',
+      label: 'i18n:pl_layers',
       defaultValue: 2,
       type: 'range',
       attr: {

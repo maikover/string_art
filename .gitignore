@@ -1,3 +1,34 @@
-node_modules
-.parcel-cache
-dist
+# Dependencies
+node_modules/
+pnpm_modules/
+
+# Build outputs
+.parcel-cache/
+dist/
+
+# IDE / OS noise
+.idea/
+*.iml
+.DS_Store
+*.swp
+*.swo
+
+# APK / build artifacts
+*.apk
+*.aab
+
+# Backup files
+*.bak
+
+# Dev scripts / scratch
+*.cjs
+*.svg
+web/android/app/src/main/assets/public/_next/
+web/android/app/src/main/assets/public/404.html
+web/android/app/src/main/assets/public/_not-found.html
+
+# Hermes local
+.hermes/
+
+# npm local configs
+.npmrc

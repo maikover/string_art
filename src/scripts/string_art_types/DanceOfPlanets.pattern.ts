@@ -76,19 +76,19 @@ function getShapeControlsGroup(
     children: [
       {
         key: `shape${shapeIndex}Type`,
-        label: 'Type',
+        label: 'i18n:pl_type',
         type: 'select',
         defaultValue: 'circle',
         options: [
-          { value: 'circle', label: 'Circle' },
-          { value: 'polygon', label: 'Polygon' },
+          { value: 'circle', label: 'i18n:pl_type_circle' },
+          { value: 'polygon', label: 'i18n:pl_type_polygon' },
         ],
         isStructural: true,
       },
       shapeIndex === 2
         ? {
             key: `shape${shapeIndex}Size`,
-            label: 'Size',
+            label: 'i18n:pl_size',
             type: 'range',
             attr: {
               min: 0.1,
@@ -104,7 +104,7 @@ function getShapeControlsGroup(
         : undefined,
       {
         key: `shape${shapeIndex}Sides`,
-        label: 'Sides',
+        label: 'i18n:pl_sides',
         type: 'range',
         attr: {
           min: 3,
@@ -125,7 +125,7 @@ function getShapeControlsGroup(
       shapeIndex === 2
         ? {
             key: 'identicalNailCount',
-            label: 'Nail count as outer shape',
+            label: 'i18n:pl_nail_count',
             type: 'checkbox',
             defaultValue: false,
             isStructural: true,
@@ -133,7 +133,7 @@ function getShapeControlsGroup(
         : null,
       {
         key: `shape${shapeIndex}NailCount`,
-        label: 'Nail count',
+        label: 'i18n:pl_nail_count',
         type: 'range',
         attr: {
           min: 3,
@@ -147,7 +147,7 @@ function getShapeControlsGroup(
       },
       {
         key: `shape${shapeIndex}Rotation`,
-        label: 'Rotation',
+        label: 'i18n:pl_rotation',
         type: 'range',
         attr: {
           min: 0,
@@ -169,7 +169,7 @@ export default class DanceOfPlanets extends StringArt<
 > {
   static type = 'dance_of_planets';
 
-  name = 'Dance of Planets';
+  name = 'i18n:pattern_dance_of_planets';
   id = 'dance_of_planets';
   controls: ControlsConfig<DanceOfPlanetsConfig> = [
     getShapeControlsGroup('Outer shape', 1),
@@ -177,7 +177,7 @@ export default class DanceOfPlanets extends StringArt<
     {
       type: 'range',
       key: 'rounds',
-      label: 'Rounds',
+      label: 'i18n:pl_rounds',
       attr: {
         min: 1,
         max: 30,
@@ -189,7 +189,7 @@ export default class DanceOfPlanets extends StringArt<
     {
       key: 'reverse',
       type: 'checkbox',
-      label: 'Reverse order',
+      label: 'i18n:pl_reverse_order',
       description:
         'If on, while the first shape advances in one direction, the second shape advances in the opposite direction',
       defaultValue: false,

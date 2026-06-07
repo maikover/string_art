@@ -36,14 +36,14 @@ interface TCalc {
 class Spirals extends StringArt<SpiralsConfig, TCalc> {
   static type = 'spirals';
 
-  name = 'Spirals';
+  name = 'i18n:pattern_spirals';
   id = 'spirals';
   link =
     'https://www.etsy.com/il-en/listing/974865185/3d-string-art-spiral-mandala-wall?ref=shop_home_active_10&frs=1';
   controls: ControlsConfig<SpiralsConfig> = [
     {
       key: 'nSpirals',
-      label: 'Number of spirals',
+      label: 'i18n:pl_number_of_spirals',
       defaultValue: 3,
       type: 'range',
       attr: { min: 2, max: 20, step: 1 },
@@ -51,7 +51,7 @@ class Spirals extends StringArt<SpiralsConfig, TCalc> {
     },
     {
       key: 'nailsPerSpiral',
-      label: 'Nails per spiral',
+      label: 'i18n:pl_nails_per_spiral',
       type: 'range',
       defaultValue: 80,
       attr: {
@@ -63,7 +63,7 @@ class Spirals extends StringArt<SpiralsConfig, TCalc> {
     },
     {
       key: 'angle',
-      label: 'Angle',
+      label: 'i18n:pl_angle',
       type: 'range',
       defaultValue: 0.52,
       attr: {
@@ -77,7 +77,7 @@ class Spirals extends StringArt<SpiralsConfig, TCalc> {
     },
     {
       key: 'radiusEasing',
-      label: 'Radius easing',
+      label: 'i18n:pl_radius_easing',
       defaultValue: 1.8,
       type: 'range',
       attr: { min: 1, max: 10, step: 0.1 },
@@ -86,7 +86,7 @@ class Spirals extends StringArt<SpiralsConfig, TCalc> {
     },
     {
       key: 'angleEasing',
-      label: 'Angle easing',
+      label: 'i18n:pl_angle_easing',
       defaultValue: 1.3,
       type: 'range',
       attr: { min: 1, max: 10, step: 0.1 },

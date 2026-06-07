@@ -43,7 +43,7 @@ export default class Spiral extends StringArt<SpiralConfig, TCalc> {
   static type = 'spiral';
 
   id = 'spiral';
-  name = 'Spiral';
+  name = 'i18n:pattern_spiral';
   controls: ControlsConfig<SpiralConfig> = [
     // @ts-ignore
     {
@@ -52,7 +52,7 @@ export default class Spiral extends StringArt<SpiralConfig, TCalc> {
     },
     {
       key: 'repetition',
-      label: 'Repetition',
+      label: 'i18n:pl_repetition',
       defaultValue: 5,
       type: 'range',
       attr: { min: 1, max: 20, step: 1 },
@@ -61,7 +61,7 @@ export default class Spiral extends StringArt<SpiralConfig, TCalc> {
     },
     {
       key: 'innerLength',
-      label: 'Spiral thickness',
+      label: 'i18n:pl_spiral_thickness',
       defaultValue: 0.5,
       type: 'range',
       attr: {

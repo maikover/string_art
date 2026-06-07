@@ -38,12 +38,12 @@ export default class PolygonPattern extends StringArt<
 > {
   static type = 'polygon';
 
-  name = 'Polygon';
+  name = 'i18n:pattern_polygon';
   id = 'polygon';
   controls: ControlsConfig<PolygonPatternConfig> = [
     {
       key: 'sides',
-      label: 'Sides',
+      label: 'i18n:pl_sides',
       defaultValue: 5,
       type: 'range',
       attr: {
@@ -55,7 +55,7 @@ export default class PolygonPattern extends StringArt<
     },
     {
       key: 'n',
-      label: 'Nails per side',
+      label: 'i18n:pl_nails_per_side',
       defaultValue: 60,
       type: 'range',
       attr: {

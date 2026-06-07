@@ -1,7 +1,28 @@
+import { Capacitor } from '@capacitor/core';
+
 const swFilename = 'service-worker.js';
 
 export async function initServiceWorker() {
-  if (!navigator.serviceWorker || document.location.hostname === '127.0.0.1') {
+  if (!navigator.serviceWorker) {
+    return;
+  }
+
+  // En Android nativo no necesitamos Service Worker (los archivos son locales).
+  // Desregistramos si existe alguno previo atrapado en caché.
+  if (typeof Capacitor !== 'undefined' && Capacitor.isNativePlatform?.()) {
+    try {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      for (const registration of registrations) {
+        await registration.unregister();
+      }
+      console.log('Service Workers unregistered for native app.');
+    } catch (e) {
+      console.error('Error unregistering service worker:', e);
+    }
+    return;
+  }
+
+  if (document.location.hostname === '127.0.0.1') {
     return;
   }
 

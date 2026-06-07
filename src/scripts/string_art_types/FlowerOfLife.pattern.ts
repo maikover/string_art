@@ -68,7 +68,7 @@ const COLOR_CONFIG = Color.getConfig({
   customControls: [
     {
       key: 'colorPerLevel',
-      label: 'Color per level',
+      label: 'i18n:pl_color_per_level',
       defaultValue: true,
       type: 'checkbox',
       affectsNails: false,
@@ -84,14 +84,14 @@ const SIDE_ANGLES = new Array(6)
 export default class FlowerOfLife extends StringArt<FlowerOfLifeConfig, TCalc> {
   static type = 'flower_of_life';
 
-  name = 'Flower of Life';
+  name = 'i18n:pattern_flower_of_life';
   id = 'flower_of_life';
   link =
     'https://www.reddit.com/r/psychedelicartwork/comments/mk97gi/rainbow_flower_of_life_uv_reactive_string_art/';
   controls: ControlsConfig<FlowerOfLifeConfig> = [
     {
       key: 'levels',
-      label: 'Levels',
+      label: 'i18n:pl_levels',
       defaultValue: 3,
       type: 'range',
       attr: {
@@ -103,7 +103,7 @@ export default class FlowerOfLife extends StringArt<FlowerOfLifeConfig, TCalc> {
     },
     {
       key: 'density',
-      label: 'Density',
+      label: 'i18n:pl_density',
       defaultValue: 10,
       type: 'range',
       attr: {
@@ -116,7 +116,7 @@ export default class FlowerOfLife extends StringArt<FlowerOfLifeConfig, TCalc> {
     },
     {
       key: 'globalRotation',
-      label: 'Rotation',
+      label: 'i18n:pl_rotation',
       defaultValue: 0,
       type: 'range',
       attr: {
@@ -130,12 +130,12 @@ export default class FlowerOfLife extends StringArt<FlowerOfLifeConfig, TCalc> {
     },
     {
       key: 'fillGroup',
-      label: 'Fill',
+      label: 'i18n:pl_fill',
       type: 'group',
       children: [
         {
           key: 'fill',
-          label: 'Show fill',
+          label: 'i18n:pl_show_fill',
           defaultValue: true,
           type: 'checkbox',
           isStructural: true,
@@ -143,7 +143,7 @@ export default class FlowerOfLife extends StringArt<FlowerOfLifeConfig, TCalc> {
         },
         {
           key: 'fillColor',
-          label: 'Fill color',
+          label: 'i18n:pl_fill_color',
           defaultValue: '#292e29',
           type: 'color',
           show: ({ fill }) => fill,
@@ -153,19 +153,19 @@ export default class FlowerOfLife extends StringArt<FlowerOfLifeConfig, TCalc> {
     },
     {
       key: 'ringGroup',
-      label: 'Ring',
+      label: 'i18n:pl_ring',
       type: 'group',
       children: [
         {
           key: 'renderRing',
-          label: 'Show outer ring',
+          label: 'i18n:pl_show_outer_ring',
           type: 'checkbox',
           defaultValue: true,
           isStructural: true,
         },
         {
           key: 'ringNailCount',
-          label: 'Ring nail count',
+          label: 'i18n:pl_ring_nail_count',
           defaultValue: 144,
           type: 'range',
           attr: {
@@ -178,7 +178,7 @@ export default class FlowerOfLife extends StringArt<FlowerOfLifeConfig, TCalc> {
         },
         {
           key: 'ringSize',
-          label: 'Outer ring size',
+          label: 'i18n:pl_outer_ring_size',
           defaultValue: 0.23,
           type: 'range',
           attr: {
@@ -192,7 +192,7 @@ export default class FlowerOfLife extends StringArt<FlowerOfLifeConfig, TCalc> {
         },
         {
           key: 'ringPadding',
-          label: 'Ring padding',
+          label: 'i18n:pl_ring_padding',
           defaultValue: 0.06,
           type: 'range',
           attr: {
@@ -207,7 +207,7 @@ export default class FlowerOfLife extends StringArt<FlowerOfLifeConfig, TCalc> {
         },
         {
           key: 'ringColor',
-          label: 'Ring color',
+          label: 'i18n:pl_ring_color_label',
           defaultValue: '#e8b564',
           type: 'color',
           show: ({ renderRing }) => renderRing,
@@ -217,7 +217,7 @@ export default class FlowerOfLife extends StringArt<FlowerOfLifeConfig, TCalc> {
     },
     {
       key: 'renderTriangles',
-      label: 'Show triangles',
+      label: 'i18n:pl_show_triangles',
       defaultValue: true,
       type: 'checkbox',
       isStructural: true,
@@ -225,7 +225,7 @@ export default class FlowerOfLife extends StringArt<FlowerOfLifeConfig, TCalc> {
     },
     {
       key: 'renderCaps',
-      label: 'Show caps',
+      label: 'i18n:pl_show_caps',
       defaultValue: true,
       type: 'checkbox',
       show: ({ renderTriangles }) => renderTriangles,

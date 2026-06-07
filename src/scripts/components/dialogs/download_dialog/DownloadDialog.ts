@@ -123,7 +123,7 @@ export default class DownloadDialog extends HTMLElement {
           this.elements.form.querySelector(
             'input[name="type"]:checked'
           ) as HTMLInputElement
-        )?.value as 'all' | 'nails_map';
+        )?.value as 'all' | 'nails_map' | 'video';
         this.setType(selectedType);
       }
 
@@ -191,12 +191,22 @@ export default class DownloadDialog extends HTMLElement {
     this.elements.rotateBtn.addEventListener('click', () => this.rotateImage());
   }
 
-  setType(type: 'nails_map' | 'all', updatePreview = true) {
+  setType(type: 'nails_map' | 'all' | 'video', updatePreview = true) {
     (
-      this.shadowRoot.querySelector(`#type_${type}`)! as HTMLInputElement
+      this.shadowRoot!.querySelector(`#type_${type}`)! as HTMLInputElement
     ).checked = true;
 
     this.#toggleNailNumbers(type === 'nails_map');
+    
+    // Hide format block and dpi block for video
+    const formatBlock = this.shadowRoot!.querySelector('#format_block') as HTMLElement;
+    const dpiBlock = this.shadowRoot!.querySelector('#dpi_block') as HTMLElement;
+    if (formatBlock) toggleHide(formatBlock, type === 'video');
+    if (dpiBlock) toggleHide(dpiBlock, type === 'video');
+
+    // Hide more options block entirely for video, since no "more options" are relevant
+    const moreOptionsBlock = this.shadowRoot!.querySelector('#more_options_block') as HTMLElement;
+    if (moreOptionsBlock) toggleHide(moreOptionsBlock, type === 'video');
 
     if (updatePreview) {
       this.updatePreview();
@@ -504,6 +514,12 @@ export default class DownloadDialog extends HTMLElement {
     this.setSize(this.currentSize.id);
     return this.dialog
       .show(() => {
+        if ((window as any).i18n?.translateNode) {
+          (window as any).i18n.translateNode(this.shadowRoot);
+          this.dialog.setAttribute('dialog-title', (window as any).i18n.t('dl_title') || 'Download');
+          this.dialog.setAttribute('submit', (window as any).i18n.t('dl_submit') || 'Download');
+        }
+
         const savedDownloadOptions = Persistance.getPatternDownloadData(
           pattern.id
         );
@@ -517,13 +533,59 @@ export default class DownloadDialog extends HTMLElement {
         );
         Persistance.savePatternDownloadData(pattern.id, downloadOptions);
 
-        await downloadPattern(pattern, downloadOptions);
-        posthog.capture('download', {
-          pattern: pattern.type,
-          isTemplate: pattern.isTemplate,
-          ...downloadOptions,
-        });
+        let loadingOverlay: HTMLDivElement | null = null;
+        if (downloadOptions.type === 'video') {
+          const winI18n = (window as any).i18n;
+          const msg = winI18n?.t ? winI18n.t('generating_video') : 'Generando video, espera...';
+          loadingOverlay = document.createElement('div');
+          loadingOverlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;font-family:sans-serif;font-weight:700;font-size:1.5em;';
+          loadingOverlay.innerHTML = `
+            <style>@keyframes stringart-pulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.1); opacity: 0.8; } }</style>
+            <i class="icon-play" style="font-size:4em; margin-bottom:24px; animation: stringart-pulse 0.8s infinite alternate; color: var(--color-accent, #FFD93D);"></i>
+            <div style="text-align:center;">${msg}</div>
+          `;
+          document.body.appendChild(loadingOverlay);
+        }
+
+        console.log('[DownloadDialog] Calling downloadPattern with options:', downloadOptions);
+        try {
+          const result = await downloadPattern(pattern, downloadOptions);
+          console.log('[DownloadDialog] downloadPattern result:', result);
+          posthog.capture('download', {
+            pattern: pattern.type,
+            isTemplate: pattern.isTemplate,
+            ...downloadOptions,
+          });
+          
+          const winI18n = (window as any).i18n;
+          if (result?.success) {
+            const successMsg = winI18n?.t ? winI18n.t('dl_success') : 'Download successful';
+            this.#showToast(successMsg);
+          } else {
+            const errorMsg = winI18n?.t ? winI18n.t('dl_error') : 'Error downloading image';
+            this.#showToast(errorMsg);
+          }
+        } catch (err) {
+          console.error('[DownloadDialog] downloadPattern error:', err);
+          const winI18n = (window as any).i18n;
+          const errorMsg = winI18n?.t ? winI18n.t('dl_error') : 'Error downloading image';
+          this.#showToast(errorMsg);
+        } finally {
+          if (loadingOverlay) loadingOverlay.remove();
+        }
+      })
+      .catch(() => {
+        // User cancelled the dialog (returnValue !== 'confirm') — silent.
       });
+  }
+
+  #showToast(message: string) {
+    // Dispatch a custom event that the host page can listen for. The host
+    // page (or another listener) is responsible for rendering a visible
+    // toast/banner; we keep this component framework-agnostic.
+    window.dispatchEvent(
+      new CustomEvent('stringart:download-toast', { detail: { message } })
+    );
   }
 
   #formValuesToDownloadOptions(
@@ -531,6 +593,7 @@ export default class DownloadDialog extends HTMLElement {
     pattern: StringArt
   ): DownloadPatternOptions {
     const isNailsMap = values.type === 'nails_map';
+    const isVideo = values.type === 'video';
 
     let dimensions = this.#getDimensionsBySizeId(values.size as string);
     if (values.rotate_image) {
@@ -538,14 +601,14 @@ export default class DownloadDialog extends HTMLElement {
     }
     const options: DownloadPatternOptions = {
       size: dimensions,
-      type: values.format === 'svg' ? 'svg' : 'canvas',
-      imageType: values.format === 'svg' ? null : (values.format as ImageType),
+      type: isVideo ? ('video' as any) : values.format === 'svg' ? 'svg' : 'canvas',
+      imageType: values.format === 'svg' || isVideo ? null : (values.format as ImageType),
       isNailsMap: isNailsMap,
       units: (values.unit ?? 'px') as SizeUnit,
       dpi: Number(values.dpi),
       margin: Number(values.margin),
       includeNailNumbers: isNailsMap && values.render_numbers === 'on',
-      filename: isNailsMap ? `${pattern.name} - nail map` : pattern.name,
+      filename: isNailsMap ? `${pattern.displayName} - nail map` : pattern.displayName,
       enableBackground: !this.isTransparentBackground,
       sizeId: String(values.size),
       isRotated: !!values.rotate_image,
@@ -574,7 +637,10 @@ export default class DownloadDialog extends HTMLElement {
         enableBackground: true,
       };
     }
-    this.setType(downloadOptions.isNailsMap ? 'nails_map' : 'all', false);
+    const targetType = downloadOptions.isNailsMap 
+      ? 'nails_map' 
+      : (downloadOptions.type === 'video' || (downloadOptions as any).imageType === 'video' ? 'video' : 'all');
+    this.setType(targetType, false);
 
     this.#toggleNailNumbers(downloadOptions.isNailsMap);
     (this.shadowRoot.querySelector(
@@ -659,6 +725,7 @@ export default class DownloadDialog extends HTMLElement {
             showStrings: false,
             nailsColor: '#000000',
             backgroundColor: '#ffffff',
+            customBackgroundColor: true,
             enableBackground: !this.isTransparentBackground,
           }
         : {

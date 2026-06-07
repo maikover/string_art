@@ -43,7 +43,7 @@ interface FreestyleConfig {
 }
 
 const rotationConfig = {
-  label: 'Rotation',
+  label: 'i18n:pl_rotation',
   defaultValue: 0,
   type: 'range' as ControlType,
   attr: {
@@ -78,14 +78,14 @@ function getCircleConfig(i: number) {
     children: [
       {
         key: `show${i}`,
-        label: 'Enable',
+        label: 'i18n:pl_enable',
         defaultValue: true,
         type: 'checkbox',
         isStructural: true,
       },
       {
         key: `n${i}`,
-        label: 'Nails count',
+        label: 'i18n:pl_nails_count',
         type: 'range',
         attr: { min: 1, max: 300, step: 1 },
         show,
@@ -93,7 +93,7 @@ function getCircleConfig(i: number) {
       },
       {
         key: `radius${i}`,
-        label: 'Radius',
+        label: 'i18n:pl_radius',
         type: 'range',
         attr: { min: 0.01, max: 1, step: 0.01 },
         show,
@@ -101,7 +101,7 @@ function getCircleConfig(i: number) {
       },
       {
         key: `x${i}`,
-        label: 'Position X',
+        label: 'i18n:pl_position_x',
         type: 'range',
         attr: { min: 0, max: 1, step: 0.01 },
         show,
@@ -109,7 +109,7 @@ function getCircleConfig(i: number) {
       },
       {
         key: `y${i}`,
-        label: 'Position Y',
+        label: 'i18n:pl_position_y',
         type: 'range',
         attr: { min: 0, max: 1, step: 0.01 },
         show,
@@ -123,7 +123,7 @@ function getCircleConfig(i: number) {
       },
       {
         key: `reverse${i}`,
-        label: 'Reverse',
+        label: 'i18n:pl_reverse',
         type: 'checkbox',
         isStructural: true,
         show,
@@ -135,14 +135,14 @@ function getCircleConfig(i: number) {
 export default class Freestyle extends StringArt<FreestyleConfig, TCalc> {
   static type = 'freestyle';
 
-  name = 'Freestyle';
+  name = 'i18n:pattern_freestyle';
   id = 'freestyle';
   link =
     'https://www.etsy.com/il-en/listing/1018950430/calming-wall-art-in-light-blue-for';
   controls: ControlsConfig<FreestyleConfig> = [
     {
       key: 'color',
-      label: 'Color',
+      label: 'i18n:pl_color',
       defaultValue: '#ec6ad0',
       type: 'color',
       affectsNails: false,
@@ -150,7 +150,7 @@ export default class Freestyle extends StringArt<FreestyleConfig, TCalc> {
     },
     {
       key: 'layers',
-      label: 'Layers',
+      label: 'i18n:pl_layers',
       type: 'group',
       // @ts-ignore
       children: createArray(3, i => getCircleConfig(i + 1)),

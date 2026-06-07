@@ -1,57 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&display=block');
 
-:root {
-  /* === NEO-BRUTALIST COLOR PALETTE === */
+/* =============================================
+   STRING ART STUDIO — NEO-BRUTALIST DESIGN TOKENS
+   =============================================
 
-  /* Background - Cream/Newsprint */
+   STRUCTURE:
+   :root          = DEFAULT (light theme)
+   [data-theme]   = user's saved preference
+   [data-theme="dark"] = dark overrides
+
+   PATTERN RULE: dark values go ONLY in [data-theme="dark"],
+   never in :root (otherwise :root always wins).
+   ============================================= */
+
+:root {
+  color-scheme: light;
+  /* === BACKGROUND (Canvas) — Light theme default === */
   --color-canvas-background: #FFFDF5;
 
-  /* Foreground - Pure Ink Black */
+  /* === SURFACE / PANELS — light theme default === */
   --color-config: #FFFFFF;
   --color-header: #FFFDF5;
   --color-player: #FFFDF5;
   --color-buttons-dialog: #FFFFFF;
   --color-dialog-background: #FFFDF5;
 
-  /* Accent - Hot Red */
-  --color-accent: #FF6B6B;
-  --color-accent-hover: #FF5252;
-  --color-accent-glow: rgba(255, 107, 107, 0.3);
-
-  /* Secondary Accent - Vivid Yellow */
-  --color-accent-secondary: #FFD93D;
-  --color-accent-secondary-hover: #FFC107;
-
-  /* Tertiary - Soft Violet */
-  --color-muted: #C4B5FD;
-
-  /* Text hierarchy */
+  /* === TEXT — light theme default === */
   --color-text: #000000;
   --color-text-muted: #6B7280;
   --color-text-hover: #000000;
   --color-link: #FF6B6B;
   --color-fg-inverse: #FFFFFF;
 
-  /* Input colors */
-  --color-input: #FF6B6B;
-  --color-input-hover: #FF5252;
-  --color-input-active: #FF6B6B;
-
-  /* UI Elements */
+  /* === GRAY SCALE — light theme === */
   --color-gray3: #F3F4F6;
-  --color-lighter: rgba(0, 0, 0, 0.08);
-  --color-error: #EF4444;
+  --color-lighter: rgba(0, 0, 0, 0.06);
+  --color-border: #000000;
 
-  /* Logo - Solid black with accent color on a sticker box */
+  /* === ACCENT — Hot Red === */
+  --color-accent: #FF6B6B;
+  --color-accent-hover: #FF5252;
+  --color-accent-glow: rgba(255, 107, 107, 0.25);
+
+  /* === INPUTS & SLIDERS === */
+  --color-input: var(--color-accent);
+  --color-input-hover: var(--color-accent-hover);
+  --color-input-active: var(--color-accent-hover);
+  --color-track-bg: #E5E7EB;
+
+  /* === SECONDARY — Vivid Yellow === */
+  --color-accent-secondary: #FFD93D;
+  --color-accent-secondary-hover: #FFC107;
+
+  /* === TERTIARY — Soft Violet === */
+  --color-muted: #C4B5FD;
+  --color-muted-hover: #A78BFA;
+
+  /* === STATUS === */
+  --color-error: #EF4444;
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+
+  /* === LOGO === */
   --logo1: #000000;
   --logo1-active: #FF6B6B;
   --logo2: #FF6B6B;
+  --logo-bg: #FFD93D;
 
-  /* === BORDERS === */
-  /* The signature: thick solid black borders everywhere */
-  --border-light: solid 4px #000000;
-  --border-lighter: solid 2px #000000;
-  --border-dialog: solid 4px #000000;
+  /* === BORDERS — Neo-brutalist thick black lines === */
+  --border-default: solid 4px #000000;
+  --border-thin: solid 2px #000000;
+  --border-light: solid 2px #000000;
+  --border-lighter: solid 1px #000000;
+  --border-thick: solid 6px #000000;
   --border-accent: solid 4px #FF6B6B;
   --border-secondary: solid 4px #FFD93D;
 
@@ -73,7 +94,8 @@
   --player-mobile-height: 100px;
   --responsive-width: 800px;
 
-  /* === SHADOWS — Hard offset, zero blur === */
+  /* === SHADOWS — Hard offset, zero blur, 45° === */
+  --shadow-xs: 2px 2px 0px 0px #000000;
   --shadow-sm: 4px 4px 0px 0px #000000;
   --shadow-md: 8px 8px 0px 0px #000000;
   --shadow-lg: 12px 12px 0px 0px #000000;
@@ -81,10 +103,144 @@
   --shadow-accent: 6px 6px 0px 0px #FF6B6B;
   --shadow-secondary: 6px 6px 0px 0px #FFD93D;
 
+  /* === BACKGROUND PATTERNS — Light theme (dots = black on cream) === */
+  --dot-color: #000000;
+  --dot-size: 24px;
+  --pattern-dots: radial-gradient(circle, rgba(0,0,0,0.18) 1.5px, transparent 1.5px);
+  --pattern-grid: linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
+                 linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px);
+
   /* === EFFECTS === */
   --shadow-soft: 8px 8px 0px 0px #000000;
   --shadow-glow: 4px 4px 0px 0px #FF6B6B;
-  /* Snappy transitions — no ease-in-out velvet */
+  --transition-fast: all 0.1s ease-out;
   --transition-smooth: all 0.15s ease-out;
   --transition-medium: all 0.25s ease-out;
+}
+
+/* =============================================
+   DARK THEME — overrides go here ONLY
+   ============================================= */
+[data-theme="dark"] {
+  color-scheme: dark;
+  /* Background — dark gray, NOT pure black (easier on eyes) */
+  --color-canvas-background: #1C1C1E;
+
+  /* Surface / Panels — slightly lighter than bg */
+  --color-config: #2C2C2E;
+  --color-header: #2C2C2E;
+  --color-player: #2C2C2E;
+  --color-buttons-dialog: #2C2C2E;
+  --color-dialog-background: #2C2C2E;
+
+  /* Text — white with slightly muted for hierarchy */
+  --color-text: #FFFFFF;
+  --color-text-muted: #A1A1AA;
+  --color-text-hover: #FFFFFF;
+  --color-link: #FF8080;
+  --color-fg-inverse: #000000;
+
+  /* Gray scale — dark theme values */
+  --color-gray3: #3A3A3C;
+  --color-lighter: rgba(255, 255, 255, 0.06);
+  --color-border: #FFFFFF;
+
+  /* Accent — slightly brighter for dark bg contrast */
+  --color-accent: #FF8080;
+  --color-accent-hover: #FF6B6B;
+  --color-accent-glow: rgba(255, 128, 128, 0.3);
+
+  /* === INPUTS & SLIDERS === */
+  --color-input: var(--color-accent);
+  --color-input-hover: var(--color-accent-hover);
+  --color-input-active: var(--color-accent-hover);
+  --color-track-bg: #4B5563;
+
+  /* Secondary — maintain yellow visibility on dark */
+  --color-accent-secondary: #FFD93D;
+  --color-accent-secondary-hover: #F5C800;
+
+  /* Tertiary — brighter violet for dark bg */
+  --color-muted: #D4B8FF;
+  --color-muted-hover: #C4B5FD;
+
+  /* Logo */
+  --logo-bg: #FFD93D;
+
+  /* Borders — white in dark mode for contrast */
+  --border-default: solid 4px #FFFFFF;
+  --border-thin: solid 2px #FFFFFF;
+  --border-light: solid 2px #FFFFFF;
+  --border-lighter: solid 1px #FFFFFF;
+  --border-thick: solid 6px #FFFFFF;
+  --border-accent: solid 4px #FF8080;
+  --border-secondary: solid 4px #FFD93D;
+
+  /* Shadows — softer in dark mode */
+  --shadow-xs: 2px 2px 0px 0px #000000;
+  --shadow-sm: 4px 4px 0px 0px #000000;
+  --shadow-md: 8px 8px 0px 0px #000000;
+  --shadow-lg: 12px 12px 0px 0px #000000;
+  --shadow-xl: 16px 16px 0px 0px #000000;
+  --shadow-accent: 6px 6px 0px 0px #FF8080;
+  --shadow-secondary: 6px 6px 0px 0px #FFD93D;
+
+  /* Background patterns — white dots on dark bg */
+  --dot-color: #FFFFFF;
+  --pattern-dots: radial-gradient(circle, rgba(255,255,255,0.15) 1.5px, transparent 1.5px);
+  --pattern-grid: linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
+                 linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px);
+}
+
+/* =============================================
+   FORCE LIGHT MODE (optional — for explicit overrides)
+   ============================================= */
+[data-theme="light"] {
+  color-scheme: light;
+  --color-canvas-background: #FFFDF5;
+  --color-config: #FFFFFF;
+  --color-header: #FFFDF5;
+  --color-player: #FFFDF5;
+  --color-buttons-dialog: #FFFFFF;
+  --color-dialog-background: #FFFDF5;
+  --color-text: #000000;
+  --color-text-muted: #6B7280;
+  --color-text-hover: #000000;
+  --color-link: #FF6B6B;
+  --color-fg-inverse: #FFFFFF;
+  --color-gray3: #F3F4F6;
+  --color-lighter: rgba(0, 0, 0, 0.06);
+  --color-border: #000000;
+  --color-accent: #FF6B6B;
+  --color-accent-hover: #FF5252;
+  --color-accent-glow: rgba(255, 107, 107, 0.25);
+
+  /* === INPUTS & SLIDERS === */
+  --color-input: var(--color-accent);
+  --color-input-hover: var(--color-accent-hover);
+  --color-input-active: var(--color-accent-hover);
+  --color-track-bg: #E5E7EB;
+  --color-accent-secondary: #FFD93D;
+  --color-accent-secondary-hover: #FFC107;
+  --color-muted: #C4B5FD;
+  --color-muted-hover: #A78BFA;
+  --logo-bg: #FFD93D;
+  --border-default: solid 4px #000000;
+  --border-thin: solid 2px #000000;
+  --border-light: solid 2px #000000;
+  --border-lighter: solid 1px #000000;
+  --border-thick: solid 6px #000000;
+  --border-accent: solid 4px #FF6B6B;
+  --border-secondary: solid 4px #FFD93D;
+  --shadow-xs: 2px 2px 0px 0px #000000;
+  --shadow-sm: 4px 4px 0px 0px #000000;
+  --shadow-md: 8px 8px 0px 0px #000000;
+  --shadow-lg: 12px 12px 0px 0px #000000;
+  --shadow-xl: 16px 16px 0px 0px #000000;
+  --shadow-accent: 6px 6px 0px 0px #FF6B6B;
+  --shadow-secondary: 6px 6px 0px 0px #FFD93D;
+  --dot-color: #000000;
+  --pattern-dots: radial-gradient(circle, rgba(0,0,0,0.18) 1.5px, transparent 1.5px);
+  --pattern-grid: linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
+                 linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px);
 }

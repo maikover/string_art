@@ -137,11 +137,16 @@ class Routing extends EventBus<{
       replaceState = false,
     }: { renderer?: RendererType; replaceState?: boolean } = {}
   ) {
+    const shouldReplace = replaceState || !!this.#currentDialog;
+    if (this.#currentDialog) {
+      this.closeDialog(false);
+    }
+
     const configQuery = pattern.isDefaultConfig
       ? undefined
       : serializeConfig(pattern);
     const setHistoryState = (
-      replaceState ? history.replaceState : history.pushState
+      shouldReplace ? history.replaceState : history.pushState
     ).bind(history);
 
     setHistoryState(
@@ -160,10 +165,6 @@ class Routing extends EventBus<{
 
     if (!replaceState) {
       this.emit('pattern', { pattern, renderer });
-    }
-
-    if (this.#currentDialog) {
-      this.closeDialog(false);
     }
 
     this.emit('folder', 'design');
@@ -202,13 +203,19 @@ class Routing extends EventBus<{
         delete params.dialog;
       }
 
+      // history.state can be null on a fresh page load (no prior pushState),
+      // e.g. when the user opens a dialog directly from the landing. Guard
+      // with optional chaining + nullish coalescing so we don't dereference
+      // a null state. See __tests__/routing.test.ts for the regression test.
+      const currentFolder = history.state?.folder ?? null;
+
       history.pushState(
-        { ...params, folder: history.state.folder },
+        { ...params, folder: currentFolder },
         null,
         `/${
-          history.state.folder === 'design' || !history.state.folder
+          currentFolder === 'design' || !currentFolder
             ? ''
-            : history.state.folder
+            : currentFolder
         }?${serializeQueryParams(params)}`
       );
     }
@@ -217,6 +224,10 @@ class Routing extends EventBus<{
       this.#currentDialog = dialogId;
       this.emit('dialog', dialogId);
     }
+  }
+
+  getCurrentDialog(): string | null {
+    return this.#currentDialog;
   }
 
   closeDialog(setState = true) {

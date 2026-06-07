@@ -45,26 +45,29 @@ export default class StringArtRangeInput extends HTMLElement {
               width: ${THUMB_RADIUS * 2}px;
               height: ${THUMB_RADIUS * 2}px;
               border-radius: 50%;
-              background: var(--color-input);
+              background: var(--color-input, var(--color-accent));
               cursor: pointer;
-              border: none;
-              margin-top: -4px;
+              border: var(--border-thin, 2px solid #000000);
+              margin-top: -5px;
               z-index: 10;
-              box-shadow: 0 0 5px rgba(0,0,0,.5)
+              box-shadow: var(--shadow-xs);
+              box-sizing: border-box;
             }
 
             input[type="range"]::-webkit-slider-thumb:hover {
-              background: var(--color-input-hover);
+              background: var(--color-input-hover, var(--color-accent-hover));
             }
               
             input[type="range"]:active::-webkit-slider-thumb {
-              background: var(--color-input-active);
+              background: var(--color-input-active, var(--color-accent-hover));
             }
 
             input[type="range"]::-webkit-slider-runnable-track {
               height: 8px;
               border-radius: 4px;
               margin: 0;
+              border: 2px solid var(--color-border, #000000);
+              box-sizing: border-box;
             }
           </style>
           <style id="background"></style>
@@ -358,7 +361,7 @@ export default class StringArtRangeInput extends HTMLElement {
       `input[type="range"]::-webkit-slider-runnable-track {
         background: ${ticksBackground ? ticksBackground : ''}${
         this.#background ??
-        `linear-gradient(to right, var(--color-input) ${valueWidth}px, #ddd ${valueWidth}px)`
+        `linear-gradient(to right, var(--color-input, var(--color-accent)) ${valueWidth}px, var(--color-track-bg, #ddd) ${valueWidth}px)`
       };
       }${
         this.#background
@@ -367,12 +370,12 @@ export default class StringArtRangeInput extends HTMLElement {
        input[type="range"]:hover::-webkit-slider-runnable-track {
         background: ${
           ticksBackground ? ticksBackground : ''
-        }linear-gradient(to right, var(--color-input-hover) ${valueWidth}px, #ddd ${valueWidth}px);
+        }linear-gradient(to right, var(--color-input-hover, var(--color-accent-hover)) ${valueWidth}px, var(--color-track-bg, #ddd) ${valueWidth}px);
       }
         input[type="range"]:active::-webkit-slider-runnable-track {
         background: ${
           ticksBackground ? ticksBackground : ''
-        }linear-gradient(to right, var(--color-input-active) ${valueWidth}px, #ddd ${valueWidth}px);
+        }linear-gradient(to right, var(--color-input-active, var(--color-accent-hover)) ${valueWidth}px, var(--color-track-bg, #ddd) ${valueWidth}px);
       }`
       }`,
     ];

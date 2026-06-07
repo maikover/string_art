@@ -20,6 +20,8 @@ import { generateLotusPattern } from '@/components/patterns/Lotus';
 import { generateMaurerRosePattern } from '@/components/patterns/MaurerRose';
 import { generateSpiralsPattern } from '@/components/patterns/Spirals';
 import { generateStarOfDavidPattern } from '@/components/patterns/StarOfDavid';
+import { generateVortexPattern } from '@/components/patterns/Vortex';
+import { generateDreamcatcherPattern } from '@/components/patterns/Dreamcatcher';
 
 export type PatternId =
   | 'spiral'
@@ -40,7 +42,9 @@ export type PatternId =
   | 'lotus'
   | 'maurerRose'
   | 'spirals'
-  | 'starOfDavid';
+  | 'starOfDavid'
+  | 'vortex'
+  | 'dreamcatcher';
 
 export const patternGenerators: Record<PatternId, (w: number, h: number, config: Record<string, unknown>) => Pattern> = {
   spiral: generateSpiralPattern,
@@ -62,11 +66,13 @@ export const patternGenerators: Record<PatternId, (w: number, h: number, config:
   maurerRose: generateMaurerRosePattern,
   spirals: generateSpiralsPattern,
   starOfDavid: generateStarOfDavidPattern,
+  vortex: generateVortexPattern,
+  dreamcatcher: generateDreamcatcherPattern,
 };
 
 export const patternNames: PatternId[] = [
   'spiral', 'star', 'mandala', 'wave', 'flower',
   'polygon', 'sun', 'assymetry', 'comet', 'crosses',
   'danceOfPlanets', 'eye', 'flowerOfLife', 'freestyle',
-  'hexagonSpades', 'lotus', 'maurerRose', 'spirals', 'starOfDavid',
+  'hexagonSpades', 'lotus', 'maurerRose', 'spirals', 'starOfDavid', 'vortex', 'dreamcatcher'
 ];

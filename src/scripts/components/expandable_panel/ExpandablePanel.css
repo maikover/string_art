@@ -7,8 +7,8 @@ fieldset {
   border: var(--expandable-panel-border, var(--border-light));
   background: var(--expandable-panel-bg, rgba(255, 255, 255, 0.03));
   border-radius: 0;
-  padding-inline: 0.8em;
-  padding-bottom: 0.8em;
+  padding-inline: var(--expandable-panel-padding-inline, 0.8em);
+  padding-bottom: var(--expandable-panel-padding-bottom, 0.8em);
   width: 100%;
   margin: 0;
   box-sizing: border-box;
@@ -17,6 +17,7 @@ fieldset {
 fieldset > legend {
   cursor: pointer;
   opacity: 0.8;
+  color: var(--color-text, inherit);
 }
 
 fieldset > legend:hover {
@@ -25,6 +26,7 @@ fieldset > legend:hover {
 
 div {
   padding-top: 8px;
+  padding-left: var(--expandable-panel-content-padding-left, 0px);
 }
 
 fieldset.minimized {
@@ -43,13 +45,15 @@ fieldset.minimized > div {
 }
 
 legend::before {
-  font-family: 'string_art_studio';
-  content: '\e903';
+  font-family: 'Font Awesome 6 Free' !important;
+  font-weight: 900 !important;
+  content: '\f0d7';
   display: inline-block;
-  margin-inline-end: 2px;
-  font-size: 20px;
+  margin-inline-end: 6px;
+  font-size: 14px;
   opacity: 0.7;
-  vertical-align: top;
+  vertical-align: middle;
+  transition: transform 0.2s ease-out;
 }
 
 fieldset.minimized > legend::before {

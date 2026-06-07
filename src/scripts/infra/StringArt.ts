@@ -43,9 +43,27 @@ abstract class StringArt<
 }> {
   abstract controls: ControlsConfig<TConfig>;
   abstract id: string;
+  /**
+   * Either a literal display name (e.g. 'Star') or a translation key prefixed
+   * with 'i18n:' (e.g. 'i18n:pattern_star'). UI code should call displayName
+   * (the translated form) rather than reading this directly.
+   */
   abstract name: string;
   link: string;
   linkText: string;
+
+  /**
+   * Localized display name. If `name` starts with 'i18n:' the suffix is
+   * treated as a translation key. Falls back to the raw name if i18n is not
+   * loaded yet.
+   */
+  get displayName(): string {
+    if (typeof this.name === 'string' && this.name.startsWith('i18n:')) {
+      const winI18n = (window as any).i18n;
+      if (winI18n?.t) return winI18n.t(this.name.slice(5));
+    }
+    return this.name;
+  }
 
   defaultValues: Partial<Config<TConfig>> = {};
   stepCount: number | null = null;
@@ -349,7 +367,7 @@ abstract class StringArt<
       enableBackground,
     } = this.config;
 
-    const isDarkMode = !document.documentElement.classList.contains('light-theme');
+    const isDarkMode = document.documentElement.getAttribute('data-theme') !== 'light';
 
     // DEBUG
     console.log(`[draw] ${this.id}: showNails=${showNails} showStrings=${showStrings} isDarkMode=${isDarkMode} enableBackground=${enableBackground} customBackgroundColor=${customBackgroundColor} backgroundColor=${backgroundColor}`);

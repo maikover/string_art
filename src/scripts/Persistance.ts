@@ -8,6 +8,7 @@ import { ID } from './types/stringart.types';
 import { downloadFile, DownloadPatternOptions } from './download/Download';
 import { createPatternInstance } from './helpers/pattern_utils';
 import { DownloadInstructionsOptions } from './components/dialogs/download_instructions/download_instructions_types';
+import i18n from './i18n';
 
 const APP_DATA_STORAGE_KEY = 'string_art_app_data';
 
@@ -43,9 +44,9 @@ export default class Persistance extends EventBus<{
     const defaultName = getQueryParams().name ?? `Pattern #${nextId}`;
 
     prompt({
-      title: 'Save pattern',
-      description: 'Name this pattern:',
-      submit: 'Save',
+      title: i18n.t('pers_save_pattern'),
+      description: i18n.t('pers_name_pattern'),
+      submit: i18n.t('pers_save'),
       value: defaultName,
       dialogId: 'save_as',
     }).then(
@@ -102,12 +103,29 @@ export default class Persistance extends EventBus<{
     return String(nextId);
   }
 
+  #getUniquePatternName(name: string, excludeId?: string): string {
+    const savedPatterns = Persistance.getSavedPatterns();
+    let uniqueName = name;
+    let counter = 1;
+    while (
+      savedPatterns.some(
+        p => p.name.toLowerCase() === uniqueName.toLowerCase() && p.id !== excludeId
+      )
+    ) {
+      uniqueName = `${name} (${counter})`;
+      counter++;
+    }
+    return uniqueName;
+  }
+
   saveNewPattern(patternData: Omit<PatternData, 'id'>): PatternData {
     const appData = Persistance.loadAppData();
     const nextId = this.#getNextAvailableId();
+    const uniqueName = this.#getUniquePatternName(patternData.name);
 
     const newPatternData: PatternData = {
       ...patternData,
+      name: uniqueName,
       id: nextId,
     };
 
@@ -118,7 +136,7 @@ export default class Persistance extends EventBus<{
       pattern: Persistance.patternDataToStringArt(newPatternData),
     });
 
-    this.showToast('Pattern saved!');
+    this.showToast(i18n.t('pers_pattern_saved'));
 
     return newPatternData;
   }
@@ -137,7 +155,7 @@ export default class Persistance extends EventBus<{
         pattern: Persistance.patternDataToStringArt(patternData),
       });
 
-      this.showToast('Pattern saved!');
+      this.showToast(i18n.t('pers_pattern_saved'));
     }
   }
 
@@ -172,29 +190,29 @@ export default class Persistance extends EventBus<{
 
   renameCurrentPattern() {
     prompt({
-      title: 'Rename',
-      description: 'Name this pattern:',
-      submit: 'Save',
+      title: i18n.t('pers_rename'),
+      description: i18n.t('pers_name_pattern'),
+      submit: i18n.t('pers_save'),
       value: this.currentPattern.name,
       dialogId: 'rename',
     }).then(newPatternName => {
       if (newPatternName !== this.currentPattern.name) {
+        const uniqueName = this.#getUniquePatternName(newPatternName, this.currentPattern.id);
         const patternData = Persistance.loadPatternDataById(
           this.currentPattern.id
         );
-        patternData.name = newPatternName;
+        patternData.name = uniqueName;
         this.savePattern(patternData);
+        this.currentPattern.name = uniqueName;
       }
-
-      this.currentPattern.name = newPatternName;
     });
   }
 
   deletePattern() {
     confirm({
-      title: 'Delete pattern',
-      description: 'Are you sure you wish to delete this pattern?',
-      submit: 'Delete',
+      title: i18n.t('pers_delete_pattern'),
+      description: i18n.t('pers_delete_confirm'),
+      submit: i18n.t('pers_delete'),
       type: 'error',
       dialogId: 'delete',
     }).then(

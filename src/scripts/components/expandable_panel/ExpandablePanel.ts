@@ -14,9 +14,9 @@ export class ExpandablePanel extends HTMLElement {
     shadow.adoptedStyleSheets = [sheet];
 
     this.shadowRoot!.innerHTML = `
-      <fieldset>
-        <legend></legend>
-        <div>
+      <fieldset part="fieldset">
+        <legend part="legend"></legend>
+        <div part="content">
             <slot></slot>
         </div>
       </fieldset>

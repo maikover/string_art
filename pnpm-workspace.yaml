@@ -8,3 +8,12 @@ allowBuilds:
   protobufjs: set this to true or false
   unrs-resolver: set this to true or false
 approveBuilds: true
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - '@swc/core'
+  - core-js
+  - esbuild
+  - lmdb
+  - msgpackr-extract
+  - protobufjs
+  - unrs-resolver

@@ -22,12 +22,12 @@ fieldset > section {
 
 /* Neo-brutalist dialog inputs */
 .dialog-input {
-  background: #FFFFFF;
-  border: 4px solid #000000;
+  background: var(--color-config);
+  border: 4px solid var(--color-border);
   border-radius: 0;
   height: 40px !important;
   padding: 8px 12px !important;
-  color: #000000;
+  color: var(--color-text);
   outline: none;
   box-sizing: border-box;
   font-family: var(--font-body);
@@ -60,8 +60,8 @@ fieldset > section {
 }
 
 .dialog-input option {
-  background-color: #FFFFFF;
-  color: #000000;
+  background-color: var(--color-config);
+  color: var(--color-text);
 }
 
 .row {
@@ -77,18 +77,18 @@ fieldset > section {
   padding: 0 !important;
   color: var(--color-text);
   cursor: pointer;
-  border-bottom: 4px solid #000000;
+  border-bottom: 4px solid var(--color-border);
   font-weight: 700;
   text-transform: uppercase;
 }
 
 .dialog-lesser-select option {
-  color: #000000;
-  background: #FFFFFF;
+  color: var(--color-text);
+  background: var(--color-config);
 }
 
 .radio-list {
-  border: 4px solid #000000;
+  border: 4px solid var(--color-border);
   border-radius: 0;
   height: 40px;
   padding: 8px 12px;
@@ -96,7 +96,7 @@ fieldset > section {
   display: flex;
   align-items: center;
   width: fit-content;
-  background: #FFFFFF;
+  background: var(--color-config);
   box-shadow: var(--shadow-sm);
 }
 
@@ -106,9 +106,9 @@ fieldset > section {
   -webkit-appearance: none;
   width: 20px;
   height: 20px;
-  border: 4px solid #000000;
+  border: 4px solid var(--color-border);
   border-radius: 0;
-  background: #FFFFFF;
+  background: var(--color-config);
   cursor: pointer;
   position: relative;
 }
@@ -124,7 +124,7 @@ fieldset > section {
   left: 50%;
   width: 8px;
   height: 8px;
-  background: #000000;
+  background: var(--color-fg-inverse);
   transform: translate(-50%, -50%);
 }
 

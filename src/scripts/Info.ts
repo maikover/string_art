@@ -4,6 +4,7 @@ import { MeasureRenderer } from './infra/renderers/MeasureRenderer';
 import StringArt from './infra/StringArt';
 import { Dimensions } from './types/general.types';
 import { PatternInfo } from './types/info.types';
+import i18n from './i18n';
 
 const DEFAULT_TARGET_SIZE_CM: Dimensions = [30, 30];
 const DEFAULT_SIZES_CM = [20, 30, 40, 50, 60, 70, 80, 90, 100];
@@ -114,7 +115,7 @@ class Info {
         signal: controller.signal,
       });
 
-    this.elements.nailsCount.textContent = nailsCount.toLocaleString();
+    this.elements.nailsCount.textContent = i18n.fmtNumber(nailsCount);
     this.elements.threadsTotalLength.textContent = String(
       this.#threadLengthToDistance(threadsLength.total)
     );
